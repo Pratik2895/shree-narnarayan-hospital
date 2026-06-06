@@ -38,6 +38,41 @@
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Accessibility helper for screen-reader-only text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Dark mode variable overrides when `.dark` is applied to the body */
+.dark {
+    --primary: #60a5fa;
+    --primary-dark: #2563eb;
+    --primary-light: rgba(96,165,250,0.08);
+    --accent: #06b6d4;
+    --dark: #f8fafc;
+    --dark-light: #e2e8f0;
+    --gray-900: #e6eefb;
+    --gray-700: #cbd5e1;
+    --gray-600: #94a3b8;
+    --gray-500: #94a3b8;
+    --gray-400: #7b8794;
+    --gray-300: #6b7280;
+    --gray-200: #4b5563;
+    --gray-100: #0b1220;
+    --gray-50: #041025;
+    --white: #041025;
+    background: linear-gradient(180deg, #031028 0%, #041025 100%);
+    color: var(--gray-700);
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;

@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const backToTop = document.getElementById('backToTop');
     const contactForm = document.getElementById('contactForm');
+    const themeToggle = document.getElementById('themeToggle');
+    const formStatus = document.getElementById('formStatus');
 
     window.addEventListener('scroll', () => {
         header.classList.toggle('scrolled', window.scrollY > 50);
@@ -117,13 +119,48 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.style.borderColor = '#10b981';
             btn.disabled = true;
 
+            if (formStatus) {
+                formStatus.textContent = `Message sent. Thank you, ${name || 'visitor'}.`;
+            }
+
             setTimeout(() => {
                 btn.innerHTML = originalText;
                 btn.style.background = '';
                 btn.style.borderColor = '';
                 btn.disabled = false;
                 contactForm.reset();
+                if (formStatus) formStatus.textContent = '';
             }, 3000);
         });
     }
+
+    // Theme toggle: persist preference and apply
+    function applyTheme(isDark) {
+        document.body.classList.toggle('dark', isDark);
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-sun', isDark);
+                icon.classList.toggle('fa-moon', !isDark);
+            }
+        }
+    }
+
+    (function initTheme() {
+        try {
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = saved ? saved === 'dark' : prefersDark;
+            applyTheme(isDark);
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const nowDark = !document.body.classList.contains('dark');
+                    applyTheme(nowDark);
+                    localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+                });
+            }
+        } catch (e) {
+            // localStorage may be unavailable; ignore
+        }
+    })();
 });
