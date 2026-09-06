@@ -9,6 +9,10 @@
     const TC_AUTO_INTERVAL_MS  = 4500;
     const APPT_CTA_DELAY_MS    = 8000;
 
+    const prefersReducedMotion = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasIntersectionObserver = 'IntersectionObserver' in window;
+
     /* ─────────────────────────────────────────────
        WhatsApp CRM widget toggle
     ───────────────────────────────────────────── */
@@ -28,17 +32,26 @@
     const contactForm = document.getElementById('contactForm');
 
     /* ─────────────────────────────────────────────
-       HEADER SCROLL + BACK-TO-TOP
+       HEADER SCROLL + BACK-TO-TOP (rAF-throttled)
     ───────────────────────────────────────────── */
-    window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 10);
-        backToTop.classList.toggle('visible', window.scrollY > 500);
-        updateActiveNav();
-        maybeShowApptCta();
-    }, { passive: true });
+    let ticking = false;
+
+    function onScroll() {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+                backToTop.classList.toggle('visible', window.scrollY > 500);
+                updateActiveNav();
+                maybeShowApptCta();
+                ticking = false;
+            });
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     });
 
     /* ─────────────────────────────────────────────
@@ -89,31 +102,39 @@
     }
 
     /* ─────────────────────────────────────────────
-       FADE-IN ON SCROLL
+       FADE-IN ON SCROLL (guarded)
     ───────────────────────────────────────────── */
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll(
+    const revealTargets = document.querySelectorAll(
         '.service-card, .facility-card, .gallery-item, .doctor-card, ' +
         '.testimonial-card, .contact-card, .contact-form-wrapper, ' +
         '.feature, .about-content, .about-image, .schedule-info, ' +
         '.schedule-table, .vaccine-info, .vaccine-visual, .google-rating-summary'
-    ).forEach(el => {
-        el.classList.add('fade-in');
-        observer.observe(el);
-    });
+    );
+
+    if (hasIntersectionObserver) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealTargets.forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+    } else {
+        revealTargets.forEach(el => el.classList.add('visible'));
+    }
 
     /* ─────────────────────────────────────────────
-       ANIMATED COUNTERS
+       ANIMATED COUNTERS (guarded)
     ───────────────────────────────────────────── */
-    document.querySelectorAll('.stat-number[data-count]').forEach(counter => {
+    const counters = document.querySelectorAll('.stat-number[data-count]');
+
+    function runCounter(counter) {
         const target   = parseInt(counter.getAttribute('data-count'), 10);
         const duration = 1800;
         const step     = target / (duration / 16);
@@ -129,12 +150,22 @@
             }
         };
 
-        new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                update();
-            }
-        }, { threshold: 0.5 }).observe(counter);
-    });
+        update();
+    }
+
+    if (hasIntersectionObserver) {
+        counters.forEach(counter => {
+            new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    runCounter(counter);
+                }
+            }, { threshold: 0.5 }).observe(counter);
+        });
+    } else {
+        counters.forEach(counter => {
+            counter.textContent = parseInt(counter.getAttribute('data-count'), 10).toLocaleString();
+        });
+    }
 
     /* ─────────────────────────────────────────────
        FAQ ACCORDION
@@ -216,19 +247,21 @@
     setInterval(updateOpdStatus, 60000);
 
     /* ─────────────────────────────────────────────
-       TESTIMONIAL CAROUSEL (auto-rotating)
+       TESTIMONIAL CAROUSEL (auto-rotating, pausable)
     ───────────────────────────────────────────── */
     const tcTrack  = document.getElementById('tcTrack');
     const tcPrev   = document.getElementById('tcPrev');
     const tcNext   = document.getElementById('tcNext');
     const tcDots   = document.getElementById('tcDots');
+    const tcPause  = document.getElementById('tcPause');
 
     if (tcTrack && tcPrev && tcNext) {
-        const slides     = tcTrack.querySelectorAll('.tc-slide');
-        const total      = slides.length;
-        let current      = 0;
-        let autoInterval = null;
-        let slidesPerView = getSlidesPerView();
+        const slides       = tcTrack.querySelectorAll('.tc-slide');
+        const total        = slides.length;
+        let current        = 0;
+        let autoInterval   = null;
+        let paused         = false;
+        let slidesPerView  = getSlidesPerView();
 
         function getSlidesPerView() {
             if (window.innerWidth <= 860) return 1;
@@ -247,6 +280,7 @@
                 const dot = document.createElement('button');
                 dot.className = 'tc-dot' + (i === current ? ' active' : '');
                 dot.setAttribute('aria-label', `Go to review ${i + 1}`);
+                if (i === current) dot.setAttribute('aria-current', 'true');
                 dot.addEventListener('click', () => goTo(i));
                 tcDots.appendChild(dot);
             }
@@ -258,6 +292,8 @@
             tcTrack.style.transform = `translateX(-${current * slideWidth}px)`;
             tcDots.querySelectorAll('.tc-dot').forEach((d, i) => {
                 d.classList.toggle('active', i === current);
+                if (i === current) d.setAttribute('aria-current', 'true');
+                else d.removeAttribute('aria-current');
             });
         }
 
@@ -265,6 +301,7 @@
         function prev() { goTo(current <= 0 ? maxIndex() : current - 1); }
 
         function startAuto() {
+            if (paused || prefersReducedMotion) return;
             stopAuto();
             autoInterval = setInterval(next, TC_AUTO_INTERVAL_MS);
         }
@@ -273,18 +310,39 @@
             if (autoInterval) clearInterval(autoInterval);
         }
 
-        tcNext.addEventListener('click', () => { next(); startAuto(); });
-        tcPrev.addEventListener('click', () => { prev(); startAuto(); });
+        function restartAuto() {
+            if (paused || prefersReducedMotion) return;
+            startAuto();
+        }
+
+        tcNext.addEventListener('click', () => { next(); restartAuto(); });
+        tcPrev.addEventListener('click', () => { prev(); restartAuto(); });
+
+        if (tcPause) {
+            tcPause.addEventListener('click', () => {
+                paused = !paused;
+                tcPause.setAttribute('aria-pressed', String(paused));
+                tcPause.setAttribute('aria-label', paused ? 'Play auto-rotation' : 'Pause auto-rotation');
+                const icon = tcPause.querySelector('i');
+                if (icon) {
+                    icon.className = paused ? 'fas fa-play' : 'fas fa-pause';
+                }
+                if (paused) stopAuto();
+                else restartAuto();
+            });
+        }
 
         const carousel = tcTrack.closest('.testimonial-carousel');
         carousel.addEventListener('mouseenter', stopAuto);
-        carousel.addEventListener('mouseleave', startAuto);
+        carousel.addEventListener('mouseleave', restartAuto);
+        carousel.addEventListener('focusin', stopAuto);
+        carousel.addEventListener('focusout', restartAuto);
 
         let touchStartX = 0;
         tcTrack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
         tcTrack.addEventListener('touchend', e => {
             const dx = e.changedTouches[0].clientX - touchStartX;
-            if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); startAuto(); }
+            if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); restartAuto(); }
         }, { passive: true });
 
         window.addEventListener('resize', () => {
@@ -301,7 +359,7 @@
 
         buildDots();
         goTo(0);
-        startAuto();
+        if (!prefersReducedMotion) startAuto();
     }
 
     /* ─────────────────────────────────────────────
@@ -334,11 +392,37 @@
     }
 
     /* ─────────────────────────────────────────────
-       CONTACT FORM -> WHATSAPP
+       CONTACT FORM -> WHATSAPP (accessible)
     ───────────────────────────────────────────── */
     if (contactForm) {
+        const nameInput  = document.getElementById('name');
+        const phoneInput = document.getElementById('phone');
+        const formError  = document.getElementById('formError');
+        const submitBtn  = contactForm.querySelector('button[type="submit"]');
+
+        function clearErrors() {
+            [nameInput, phoneInput].forEach(input => {
+                input.classList.remove('invalid');
+                input.removeAttribute('aria-invalid');
+            });
+            if (formError) formError.textContent = '';
+        }
+
+        nameInput.addEventListener('input', clearErrors);
+        phoneInput.addEventListener('input', () => {
+            if (phoneInput.classList.contains('invalid')) clearErrors();
+        });
+
+        function showErrors(message, firstInvalid) {
+            if (formError) formError.textContent = message;
+            firstInvalid.setAttribute('aria-invalid', 'true');
+            firstInvalid.focus({ preventScroll: false });
+        }
+
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            clearErrors();
+
             const fd        = new FormData(contactForm);
             const name      = fd.get('name').trim();
             const phone     = fd.get('phone').trim();
@@ -347,24 +431,19 @@
             const service   = fd.get('service').trim();
             const message   = fd.get('message').trim();
 
-            const phoneInput = document.getElementById('phone');
-            const nameInput  = document.getElementById('name');
-            let valid = true;
+            const digits = phone.replace(/\D/g, '');
+            const phoneValid = /^[+]?[0-9][0-9\s()-]*$/.test(phone) &&
+                               digits.length >= 10 && digits.length <= 15;
 
-            if (!name) { nameInput.classList.add('invalid'); valid = false; }
-            else { nameInput.classList.remove('invalid'); }
+            if (!name) {
+                nameInput.classList.add('invalid');
+                showErrors('Please enter the parent\u2019s name.', nameInput);
+                return;
+            }
 
-            if (!/^[0-9+\-\s]{10,15}$/.test(phone)) { phoneInput.classList.add('invalid'); valid = false; }
-            else { phoneInput.classList.remove('invalid'); }
-
-            if (!valid) {
-                const btn = contactForm.querySelector('button[type="submit"]');
-                btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please fill required fields';
-                btn.disabled  = true;
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fab fa-whatsapp"></i> Send via WhatsApp';
-                    btn.disabled  = false;
-                }, 2500);
+            if (!phoneValid) {
+                phoneInput.classList.add('invalid');
+                showErrors('Please enter a valid phone number with 10 to 15 digits.', phoneInput);
                 return;
             }
 
@@ -381,20 +460,21 @@
             const text = encodeURIComponent(lines.join('\n'));
             const url  = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
 
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            submitBtn.innerHTML    = '<i class="fas fa-check"></i> Opening WhatsApp...';
-            submitBtn.disabled     = true;
-            submitBtn.style.background   = '#10b981';
-            submitBtn.style.borderColor  = '#10b981';
+            submitBtn.innerHTML  = '<i class="fas fa-check"></i> Opening WhatsApp...';
+            submitBtn.disabled   = true;
+            submitBtn.style.background  = '#10b981';
+            submitBtn.style.borderColor = '#10b981';
 
-            window.open(url, '_blank', 'noopener');
+            const win = window.open(url, '_blank');
+            if (!win) {
+                window.location.assign(url);
+            }
 
             setTimeout(() => {
                 submitBtn.innerHTML  = '<i class="fab fa-whatsapp"></i> Send via WhatsApp';
                 submitBtn.style.background  = '';
                 submitBtn.style.borderColor = '';
                 submitBtn.disabled   = false;
-                contactForm.reset();
             }, 4000);
         });
     }
@@ -408,9 +488,11 @@
     /* ─────────────────────────────────────────────
        IMAGE ERROR FALLBACK
     ───────────────────────────────────────────── */
-    document.querySelectorAll('img[src^="https://images.unsplash"]').forEach(img => {
+    document.querySelectorAll('img[src^="images/"], img[src^="https://images.unsplash"]').forEach(img => {
         img.addEventListener('error', () => {
-            const wrapper = img.closest('.hero-photo, .about-img-wrapper, .vaccine-visual, .doctor-photo-circle');
+            const wrapper = img.closest(
+                '.hero-photo, .about-img-wrapper, .vaccine-visual, .gallery-item, .doctor-photo-circle'
+            );
             if (wrapper) {
                 img.style.display = 'none';
                 wrapper.classList.add('img-fallback');
