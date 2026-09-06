@@ -86,7 +86,14 @@
           "description": "Neonatologist & Pediatrician"
         }
       ],
-      "hasMap": "https://maps.google.com/?q=Shree+NarNarayan+Children+Hospital+RequestId"
+      "hasMap": "https://maps.google.com/?q=Shree+NarNarayan+Children+Hospital+Kudasan+Gandhinagar",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "73",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
     }
     </script>
 
@@ -132,7 +139,8 @@
         <div class="container topbar-inner">
             <div class="topbar-left">
                 <span><i class="fas fa-location-dot"></i> Keshvam Square, Kudasan, Gandhinagar</span>
-                <span class="topbar-hours"><i class="fas fa-clock"></i> OPD: Mon - Sun, 9 AM - 5 PM</span>
+                <span class="topbar-hours"><i class="fas fa-clock"></i> OPD: Mon – Sun, 9 AM – 5 PM</span>
+                <span class="opd-live-badge" id="opdLiveBadge"></span>
             </div>
             <div class="topbar-right">
                 <a href="tel:+918866663709"><i class="fas fa-phone"></i> +91 88666 63709</a>
@@ -199,8 +207,13 @@
                         </div>
                         <div class="stat-divider" aria-hidden="true"></div>
                         <div class="stat">
-                            <span class="stat-number" data-count="7">0</span>
-                            <span class="stat-label">Days a Week</span>
+                            <span class="stat-number">5.0</span><span class="stat-plus">★</span>
+                            <span class="stat-label">Google Rating</span>
+                        </div>
+                        <div class="stat-divider" aria-hidden="true"></div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="73">0</span>
+                            <span class="stat-label">Reviews</span>
                         </div>
                     </div>
                 </div>
@@ -408,39 +421,94 @@
                 <div class="section-header">
                     <span class="section-tag">Our Doctors</span>
                     <h2 class="section-title">Meet Your Child's Care Team</h2>
-                    <p class="section-desc">A well-known husband-and-wife team of Neonatologists &amp; Pediatricians, now serving families in Gandhinagar.</p>
+                    <p class="section-desc">A distinguished husband-and-wife team of Neonatologists &amp; Pediatricians — combining expertise, compassion, and years of dedicated service to children's health in Gandhinagar.</p>
                 </div>
                 <div class="doctors-grid">
+
+                    <!-- Dr. Reshma Bhikadiya -->
                     <div class="doctor-card">
-                        <div class="doctor-image photo">
-                            <img src="images/dr-reshma.jpg" alt="Dr. Reshma Bhikadiya, Neonatologist and Pediatrician" loading="lazy" width="600" height="764">
-                        </div>
-                        <div class="doctor-info">
-                            <h3>Dr. Reshma Bhikadiya</h3>
-                            <span class="doctor-title">Neonatologist &amp; Pediatrician</span>
-                            <p class="doctor-desc">Dedicated to caring for newborns and children with a gentle, reassuring approach — from NICU stays to everyday wellness visits.</p>
-                            <div class="doctor-details">
-                                <div class="detail"><i class="fas fa-clock"></i> Mon - Sun: 9 AM - 5 PM</div>
-                                <div class="detail"><i class="fas fa-hospital"></i> Shree NarNarayan Children Hospital</div>
+                        <div class="doctor-card-inner">
+                            <div class="doctor-photo-wrap">
+                                <div class="doctor-photo-ring">
+                                    <div class="doctor-photo-circle">
+                                        <img src="images/dr-reshma.jpg" alt="Dr. Reshma Bhikadiya, Neonatologist and Pediatrician" loading="lazy" width="260" height="260">
+                                    </div>
+                                </div>
+                                <div class="doctor-verified"><i class="fas fa-circle-check"></i> Verified Doctor</div>
                             </div>
-                            <a href="https://wa.me/918530731365?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Reshma%20Bhikadiya." target="_blank" rel="noopener" class="btn btn-primary btn-sm">Book Appointment</a>
+                            <div class="doctor-body">
+                                <h3 class="doctor-name">Dr. Reshma Bhikadiya</h3>
+                                <div class="doctor-specialty"><i class="fas fa-stethoscope"></i> Neonatologist &amp; Pediatrician</div>
+                                <div class="doctor-quals">
+                                    <span class="qual-badge">MD (Pediatrics)</span>
+                                    <span class="qual-badge">DCH</span>
+                                </div>
+                                <p class="doctor-desc">Dedicated to caring for newborns and children with a gentle, reassuring approach — from critical NICU stays to everyday wellness, growth monitoring, and vaccination.</p>
+                                <div class="doctor-meta">
+                                    <div class="doctor-meta-item">
+                                        <i class="fas fa-hospital-user"></i>
+                                        <span>Shree NarNarayan Children Hospital</span>
+                                    </div>
+                                    <div class="doctor-meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>OPD: Mon – Sun, 9 AM – 5 PM</span>
+                                    </div>
+                                </div>
+                                <a href="https://wa.me/918530731365?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Reshma%20Bhikadiya." target="_blank" rel="noopener" class="btn btn-primary btn-doctor">
+                                    <i class="fab fa-whatsapp"></i> Book Appointment
+                                </a>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Dr. Avinash Patel -->
                     <div class="doctor-card">
-                        <div class="doctor-image photo">
-                            <img src="images/dr-avinash.jpg" alt="Dr. Avinash Patel, Neonatologist and Pediatrician" loading="lazy" width="600" height="749">
-                        </div>
-                        <div class="doctor-info">
-                            <h3>Dr. Avinash Patel</h3>
-                            <span class="doctor-title">Neonatologist &amp; Pediatrician</span>
-                            <p class="doctor-desc">Experienced in neonatal intensive care and pediatric medicine, committed to healthy, happy childhoods for every family.</p>
-                            <div class="doctor-details">
-                                <div class="detail"><i class="fas fa-clock"></i> Mon - Sun: 9 AM - 5 PM</div>
-                                <div class="detail"><i class="fas fa-hospital"></i> Shree NarNarayan Children Hospital</div>
+                        <div class="doctor-card-inner">
+                            <div class="doctor-photo-wrap">
+                                <div class="doctor-photo-ring">
+                                    <div class="doctor-photo-circle">
+                                        <img src="images/dr-avinash.jpg" alt="Dr. Avinash Patel, Neonatologist and Pediatrician" loading="lazy" width="260" height="260">
+                                    </div>
+                                </div>
+                                <div class="doctor-verified"><i class="fas fa-circle-check"></i> Verified Doctor</div>
                             </div>
-                            <a href="https://wa.me/918530731365?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Avinash%20Patel." target="_blank" rel="noopener" class="btn btn-primary btn-sm">Book Appointment</a>
+                            <div class="doctor-body">
+                                <h3 class="doctor-name">Dr. Avinash Patel</h3>
+                                <div class="doctor-specialty"><i class="fas fa-stethoscope"></i> Neonatologist &amp; Pediatrician</div>
+                                <div class="doctor-quals">
+                                    <span class="qual-badge">MD (Pediatrics)</span>
+                                    <span class="qual-badge">DCH</span>
+                                </div>
+                                <p class="doctor-desc">Experienced in neonatal intensive care and pediatric medicine — delivering calm, evidence-based care that reassures families through every stage of a child's health journey.</p>
+                                <div class="doctor-meta">
+                                    <div class="doctor-meta-item">
+                                        <i class="fas fa-hospital-user"></i>
+                                        <span>Shree NarNarayan Children Hospital</span>
+                                    </div>
+                                    <div class="doctor-meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>OPD: Mon – Sun, 9 AM – 5 PM</span>
+                                    </div>
+                                </div>
+                                <a href="https://wa.me/918530731365?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Avinash%20Patel." target="_blank" rel="noopener" class="btn btn-primary btn-doctor">
+                                    <i class="fab fa-whatsapp"></i> Book Appointment
+                                </a>
+                            </div>
                         </div>
                     </div>
+
+                </div>
+
+                <!-- Google rating strip -->
+                <div class="doctors-rating-strip">
+                    <div class="rating-content">
+                        <i class="fab fa-google"></i>
+                        <div>
+                            <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <span><strong>5.0</strong> from <strong>73 reviews</strong> on Google Maps &mdash; <em>"Knowledgeable doctor, clean hospital"</em></span>
+                        </div>
+                    </div>
+                    <a href="https://maps.google.com/?q=Shree+NarNarayan+Children+Hospital+Kudasan+Gandhinagar" target="_blank" rel="noopener" class="btn btn-outline-dark btn-sm"><i class="fab fa-google"></i> Read Reviews</a>
                 </div>
             </div>
         </section>
@@ -473,51 +541,107 @@
                 <div class="section-header">
                     <span class="section-tag">Parent Voices</span>
                     <h2 class="section-title">What Families Say About Us</h2>
-                    <p class="section-desc">We're proud to be the trusted choice for pediatric care in Kudasan and nearby areas of Gandhinagar.</p>
+                    <p class="section-desc">Trusted by families across Gandhinagar — rated <strong>5.0 ⭐</strong> across 73 Google reviews for our doctors, cleanliness, and compassionate care.</p>
                 </div>
-                <div class="testimonial-grid">
-                    <div class="testimonial-card">
-                        <div class="stars" aria-label="5 out of 5 stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p>"The doctors patiently explained everything about my newborn's feeding and growth. The hospital is clean, calm, and the staff treats you like family."</p>
-                        <div class="testimonial-author">
-                            <div class="avatar"><i class="fas fa-user"></i></div>
-                            <div>
-                                <strong>Parent of a Newborn</strong>
-                                <span>Kudasan, Gandhinagar</span>
-                            </div>
-                        </div>
+
+                <!-- Google rating summary -->
+                <div class="google-rating-summary">
+                    <div class="grs-score">
+                        <span class="grs-number">5.0</span>
+                        <div class="grs-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="grs-total">73 Google Reviews</span>
                     </div>
-                    <div class="testimonial-card">
-                        <div class="stars" aria-label="5 out of 5 stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p>"We got our daughter's vaccinations done here. Very smooth process, minimal waiting, and the play zone kept her relaxed before the visit."</p>
-                        <div class="testimonial-author">
-                            <div class="avatar"><i class="fas fa-user"></i></div>
-                            <div>
-                                <strong>Parent of a Toddler</strong>
-                                <span>Gandhinagar</span>
-                            </div>
-                        </div>
+                    <div class="grs-bars">
+                        <div class="grs-bar-row"><span>5 ★</span><div class="grs-bar"><div class="grs-fill" style="width:96%"></div></div></div>
+                        <div class="grs-bar-row"><span>4 ★</span><div class="grs-bar"><div class="grs-fill" style="width:4%"></div></div></div>
+                        <div class="grs-bar-row"><span>3 ★</span><div class="grs-bar"><div class="grs-fill" style="width:0%"></div></div></div>
+                        <div class="grs-bar-row"><span>2 ★</span><div class="grs-bar"><div class="grs-fill" style="width:0%"></div></div></div>
+                        <div class="grs-bar-row"><span>1 ★</span><div class="grs-bar"><div class="grs-fill" style="width:0%"></div></div></div>
                     </div>
-                    <div class="testimonial-card">
-                        <div class="stars" aria-label="5 out of 5 stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p>"Highly reassuring NICU team. Our premature baby received excellent round-the-clock care. Forever grateful to the doctors and nurses."</p>
-                        <div class="testimonial-author">
-                            <div class="avatar"><i class="fas fa-user"></i></div>
-                            <div>
-                                <strong>Parent of a Premature Baby</strong>
-                                <span>Randesan, Gandhinagar</span>
-                            </div>
-                        </div>
+                    <div class="grs-tags">
+                        <span class="grs-tag"><i class="fas fa-user-md"></i> Knowledgeable Doctor</span>
+                        <span class="grs-tag"><i class="fas fa-hospital"></i> Clean Hospital</span>
+                        <span class="grs-tag"><i class="fas fa-baby"></i> Children Hospital</span>
+                        <span class="grs-tag"><i class="fas fa-heart"></i> Caring Staff</span>
                     </div>
                 </div>
+
+                <!-- Auto-rotating testimonial carousel -->
+                <div class="testimonial-carousel" id="testimonialCarousel" aria-label="Patient testimonials">
+                    <div class="tc-track" id="tcTrack">
+
+                        <div class="testimonial-card tc-slide">
+                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p>"I had a very good experience with Dr. Avinash Patel at Narnarayan Hospital. He is very polite, knowledgeable, and listens to the patient's concerns with patience. His explanation of the diagnosis and treatment was clear and reassuring."</p>
+                            <div class="testimonial-author">
+                                <div class="avatar"><i class="fas fa-user"></i></div>
+                                <div>
+                                    <strong>Saikiran Gorti</strong>
+                                    <span>2 months ago &middot; Google Review</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card tc-slide">
+                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p>"We had a wonderful experience at Shri Nar Narayan Children Hospital. I visited with my 6.5-month-old son for his cough problem, and we were very fortunate to consult Dr. Avinash Patel. Highly recommend!"</p>
+                            <div class="testimonial-author">
+                                <div class="avatar"><i class="fas fa-user"></i></div>
+                                <div>
+                                    <strong>Raja Jani</strong>
+                                    <span>Local Guide &middot; 6 months ago &middot; Google Review</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card tc-slide">
+                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p>"My 5-month-old daughter was admitted last week. We are very thankful to Dr. Avinash Patel for his excellent treatment and guidance. The nursing and hospital staff were also very supportive, caring, and cooperative."</p>
+                            <div class="testimonial-author">
+                                <div class="avatar"><i class="fas fa-user"></i></div>
+                                <div>
+                                    <strong>Krupal Patel</strong>
+                                    <span>3 months ago &middot; Google Review</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card tc-slide">
+                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p>"Had a great experience at Shree Narnarayan Hospital. The staff was polite, the environment clean, and the doctors were professional and attentive. Everything was well-organized and timely. Highly recommend for quality and trustworthy healthcare."</p>
+                            <div class="testimonial-author">
+                                <div class="avatar"><i class="fas fa-user"></i></div>
+                                <div>
+                                    <strong>Bhikadiya Pratik</strong>
+                                    <span>Local Guide &middot; 34 reviews &middot; Google Review</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card tc-slide">
+                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p>"Facilities, treatment, doctors and all the staff members are very cooperative. The hospital is clean and well-maintained. Absolutely the right place to bring your child for quality pediatric care in Gandhinagar."</p>
+                            <div class="testimonial-author">
+                                <div class="avatar"><i class="fas fa-user"></i></div>
+                                <div>
+                                    <strong>Verified Patient</strong>
+                                    <span>Google Review &middot; Kudasan, Gandhinagar</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Carousel controls -->
+                    <div class="tc-controls" aria-label="Testimonial navigation">
+                        <button class="tc-btn tc-prev" id="tcPrev" aria-label="Previous testimonial"><i class="fas fa-chevron-left"></i></button>
+                        <div class="tc-dots" id="tcDots"></div>
+                        <button class="tc-btn tc-next" id="tcNext" aria-label="Next testimonial"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
                 <div class="testimonial-cta">
-                    <a href="https://maps.google.com/?q=Shree+NarNarayan+Children+Hospital+Kudasan+Gandhinagar" target="_blank" rel="noopener" class="btn btn-outline-dark"><i class="fab fa-google"></i> Find us &amp; Review on Google</a>
+                    <a href="https://maps.google.com/?q=Shree+NarNarayan+Children+Hospital+Kudasan+Gandhinagar" target="_blank" rel="noopener" class="btn btn-outline-dark"><i class="fab fa-google"></i> Read All 73 Reviews on Google</a>
                 </div>
             </div>
         </section>
@@ -588,7 +712,13 @@
                     <h2 class="section-title">Frequently Asked Questions</h2>
                     <p class="section-desc">Answers to the questions parents ask us most.</p>
                 </div>
-                <div class="faq-list">
+                <div class="faq-search-wrapper">
+                    <div class="faq-search">
+                        <i class="fas fa-search"></i>
+                        <input type="search" id="faqSearch" placeholder="Search frequently asked questions..." aria-label="Search FAQ">
+                    </div>
+                </div>
+                <div class="faq-list" id="faqList">
                     <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
                             <span>What are the hospital timings?</span>
@@ -799,6 +929,13 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating appointment CTA -->
+    <div class="float-appt-cta" id="floatApptCta" role="complementary" aria-label="Quick appointment">
+        <button class="float-appt-close" id="floatApptClose" aria-label="Dismiss"><i class="fas fa-times"></i></button>
+        <p><strong>Need an appointment?</strong></p>
+        <a href="https://wa.me/918530731365?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
+    </div>
 
     <a href="https://wa.me/918530731365?text=Hello%20Shree%20NarNarayan%20Children%20Hospital" target="_blank" rel="noopener" class="float-btn float-whatsapp" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
