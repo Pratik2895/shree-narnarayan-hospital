@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shreenarnarayanhospital.in/sitemap.xml
+
+Host: https://shreenarnarayanhospital.in

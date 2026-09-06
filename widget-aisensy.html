@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiSensy Widget — Paste Point for Shree NarNarayan Children Hospital</title>
+</head>
+<body>
+    <p>This is NOT a page of the website. It shows exactly how to activate the AiSensy WhatsApp booking widget.</p>
+
+    <hr>
+
+    <h2>What has already been done</h2>
+    <ol>
+        <li>The site's booking form + all WhatsApp buttons already send to <strong>+91 85307 31365</strong> (the doctor's line).</li>
+        <li>A marked paste point is ready in <code>index.html</code> right after the opening <code>&lt;body&gt;</code> tag (look for the HTML comment).</li>
+        <li><code>script.js</code> has a switch <code>WHATSAPP_CRM_WIDGET_ACTIVE</code> — set it to <code>true</code> once the widget is pasted, so the site hides its own WhatsApp pill and avoids two chat buttons over each other.</li>
+    </ol>
+
+    <h2>What YOU need to do (account steps — ~10 minutes)</h2>
+    <ol>
+        <li>Sign up at <a href="https://aisensy.com" target="_blank" rel="noopener">aisensy.com</a> (Starter plan; free green tick help available).</li>
+        <li>In the AiSensy dashboard, add the WhatsApp number <strong>91 85307 31365</strong> and verify the OTP from that phone.</li>
+        <li>Go to <strong>Tools → Website Chat Widget</strong> → create a widget. Use details:
+            <ul>
+                <li>Brand name: <em>Shree NarNarayan Children Hospital</em></li>
+                <li>Default message: <em>Hi, I would like to book an appointment for my child.</em></li>
+                <li>Number: 91 85307 31365</li>
+            </ul>
+        </li>
+        <li>Press <strong>Generate Snippet</strong>, copy the <code>&lt;script&gt;...&lt;/script&gt;</code> block it produces, and paste it into <code>index.html</code> directly below the HTML comment marked for the widget.</li>
+        <li>Set <code>WHATSAPP_CRM_WIDGET_ACTIVE = true;</code> in <code>script.js</code>.</li>
+        <li>Deploy (e.g., push to GitHub Pages). The chat bubble now appears on the site and lands every chat in the AiSensy inbox on the doctor's number.</li>
+    </ol>
+
+    <h2>Recommended booking bot + CRM flow (in AiSensy Flow Builder)</h2>
+    <ul>
+        <li>Trigger: keyword <em>book</em>, or a Quick Reply from the widget.</li>
+        <li>Flow: ask service → doctor (Dr. Reshma / Dr. Avinash) → preferred date &amp; time → capture child name/age → confirm → send Google Maps location + reminder text.</li>
+        <li>Turn on T-24h and T-1h reminder templates (Utility category) to cut no-shows.</li>
+        <li>Connect Google Calendar so slots reflect real availability.</li>
+        <li>Enable push notifications in the AiSensy app so you get instant alerts on every new booking. Assign chats in the Live Chat panel; history is kept per patient in the CRM.</li>
+    </ul>
+
+    <h2>Alternative snippet style (structure AiSensy generates)</h2>
+    <p>The account snippet will look similar to this — copy YOUR generated one, not this mock:</p>
+    <pre>&lt;script type="text/javascript"&gt;
+  // (your AiSensy-specific widget ID and loader live here)
+&lt;/script&gt;</pre>
+</body>
+</html>
