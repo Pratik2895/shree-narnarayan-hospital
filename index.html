@@ -41,6 +41,14 @@
     </noscript>
     <link rel="stylesheet" href="styles.css">
 
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        window.SUPABASE_URL = 'https://mhrjgnnoloxzphuagzft.supabase.co';
+        window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ocmpnbm5vbG94enBodWFnemZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5Nzg1NTksImV4cCI6MjEwNDU1NDU1OX0.CgJemJnWAXNSQLRSW2h9AjS3ETGdE8lw01WrakpTjnc';
+        window.supabaseClient = null;
+    </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",

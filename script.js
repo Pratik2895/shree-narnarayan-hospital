@@ -14,6 +14,17 @@
     const hasIntersectionObserver = 'IntersectionObserver' in window;
 
     /* ─────────────────────────────────────────────
+       SUPABASE INITIALIZATION
+    ───────────────────────────────────────────── */
+    let supabase = null;
+    if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY &&
+        window.SUPABASE_URL !== 'https://your-project.supabase.co' &&
+        typeof supabaseClient !== 'undefined' && supabaseClient && supabaseClient.createClient) {
+        supabase = supabaseClient.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+        window.supabaseClient = supabase; // expose for debugging
+    }
+
+    /* ─────────────────────────────────────────────
        WhatsApp CRM widget toggle
     ───────────────────────────────────────────── */
     if (WHATSAPP_CRM_WIDGET_ACTIVE) {
@@ -419,7 +430,7 @@
             firstInvalid.focus({ preventScroll: false });
         }
 
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             clearErrors();
 
@@ -447,6 +458,40 @@
                 return;
             }
 
+            // Save to Supabase first (if configured)
+            let appointmentId = null;
+            if (supabase) {
+                try {
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+                    submitBtn.disabled = true;
+
+                    const { data, error } = await supabase
+                        .from('appointments')
+                        .insert({
+                            parent_name: name,
+                            phone: phone,
+                            child_name: childName || null,
+                            child_age: childAge || null,
+                            service: service || null,
+                            message: message || null,
+                            source: 'website'
+                        })
+                        .select('id')
+                        .single();
+
+                    if (error) {
+                        console.error('Supabase insert error:', error);
+                        // Don't block - continue to WhatsApp
+                    } else if (data) {
+                        appointmentId = data.id;
+                        console.log('Appointment saved with ID:', appointmentId);
+                    }
+                } catch (err) {
+                    console.error('Supabase error:', err);
+                    // Don't block - continue to WhatsApp
+                }
+            }
+
             const lines = [
                 'Hello Shree NarNarayan Children Hospital,',
                 `Parent: ${name}`,
@@ -456,12 +501,12 @@
             if (childAge)  lines.push(`Child's Age: ${childAge}`);
             if (service)   lines.push(`Service: ${service}`);
             if (message)   lines.push(`Details: ${message}`);
+            if (appointmentId) lines.push(`Reference: ${appointmentId}`);
 
             const text = encodeURIComponent(lines.join('\n'));
             const url  = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
 
             submitBtn.innerHTML  = '<i class="fas fa-check"></i> Opening WhatsApp...';
-            submitBtn.disabled   = true;
             submitBtn.style.background  = '#10b981';
             submitBtn.style.borderColor = '#10b981';
 
