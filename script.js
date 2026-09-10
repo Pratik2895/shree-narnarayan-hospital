@@ -17,11 +17,22 @@
        SUPABASE INITIALIZATION
     ───────────────────────────────────────────── */
     let supabase = null;
+    // Library from jsdelivr exports as `supabase` (lowercase) globally
+    const SupabaseLib = window.supabase || window.Supabase;
     if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY &&
         window.SUPABASE_URL !== 'https://your-project.supabase.co' &&
-        typeof supabaseClient !== 'undefined' && supabaseClient && supabaseClient.createClient) {
-        supabase = supabaseClient.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+        SupabaseLib && typeof SupabaseLib.createClient === 'function') {
+        supabase = SupabaseLib.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
         window.supabaseClient = supabase; // expose for debugging
+        console.log('Supabase client initialized');
+    } else {
+        console.warn('Supabase init failed:', {
+            hasUrl: !!window.SUPABASE_URL,
+            hasKey: !!window.SUPABASE_ANON_KEY,
+            hasLib: !!SupabaseLib,
+            libType: typeof SupabaseLib,
+            hasCreateClient: SupabaseLib && typeof SupabaseLib.createClient === 'function'
+        });
     }
 
     /* ─────────────────────────────────────────────
