@@ -66,7 +66,7 @@ shree-narnarayan-hospital/
 
 2. **Phone numbers**
    - Primary (calls): `tel:+918866663709`
-   - WhatsApp / bookings: `wa.me/918530731365` and `const WHATSAPP_NUMBER = '918530731365'` in `script.js`
+   - WhatsApp / bookings: `wa.me/918866663709` and `const WHATSAPP_NUMBER = '918866663709'` in `script.js`
 
 3. **OPD hours** — **Mon–Sat, Morning 10:00 AM – 1:00 PM & Evening 5:00 – 8:00 PM** with 24x7 Emergency & NICU.  
    To change the live badge, edit `OPD_SESSIONS` in `script.js`.
@@ -99,11 +99,11 @@ Drag-and-drop the folder into Netlify Drop, or connect the GitHub repo — works
 
 | Tier | How |
 |---|---|
-| **Free (start today)** | Install **WhatsApp Business App** on `+91 85307 31365`. Every booking lands as a chat with full history. Add quick replies and a service catalog. |
+| **Free (start today)** | Install **WhatsApp Business App** on `+91 88666 63709`. Every booking lands as a chat with full history. Add quick replies and a service catalog. |
 | **Scale up** | Sign up with **AiSensy** (~Rs 999–1,500/mo). The site is pre-wired: paste point is marked in `index.html`, toggle `WHATSAPP_CRM_WIDGET_ACTIVE` is in `script.js`, and `widget-aisensy.html` has the step-by-step guide. |
 
 **Upgrade path with AiSensy:**
-- Connect `+91 85307 31365` via Meta Coexistence (keeps the Business App active)
+- Connect `+91 88666 63709` via Meta Coexistence (keeps the Business App active)
 - Generate the Website Chat Widget snippet → paste into `index.html`
 - Set `WHATSAPP_CRM_WIDGET_ACTIVE = true` in `script.js`
 - Build a booking flow: service → doctor → date → auto-confirmation with Maps link
@@ -129,4 +129,4 @@ Drag-and-drop the folder into Netlify Drop, or connect the GitHub repo — works
 | **Google rating** | 5.0 stars (73 reviews) |
 | **Address** | Keshvam Square, 301-304, SMVS Hospital Road, Kudasan, Gandhinagar 382426 |
 | **Phone** | +91 88666 63709 |
-| **WhatsApp** | +91 85307 31365 |
+| **WhatsApp** | +91 88666 63709 |

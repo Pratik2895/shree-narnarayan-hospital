@@ -2,7 +2,7 @@
     /* ─────────────────────────────────────────────
        CONFIGURATION
     ───────────────────────────────────────────── */
-    const WHATSAPP_NUMBER      = '918530731365';
+    const WHATSAPP_NUMBER      = '918866663709';
     const WHATSAPP_CRM_WIDGET_ACTIVE = false;
     // OPD sessions (IST): Morning 10 AM-1 PM, Evening 5 PM-8 PM, Mon-Sat
     const OPD_SESSIONS = [
