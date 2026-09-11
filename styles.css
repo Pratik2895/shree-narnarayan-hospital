@@ -328,6 +328,14 @@ h1, h2, h3, h4 {
     flex-shrink: 0;
 }
 
+.logo-img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: var(--radius-sm);
+}
+
 .logo-text {
     display: flex;
     flex-direction: column;

@@ -68,8 +68,8 @@ shree-narnarayan-hospital/
    - Primary (calls): `tel:+918866663709`
    - WhatsApp / bookings: `wa.me/918530731365` and `const WHATSAPP_NUMBER = '918530731365'` in `script.js`
 
-3. **OPD hours** — Confirmed **Mon–Sun, 9:00 AM – 5:00 PM** with 24x7 Emergency & NICU.  
-   To change the live badge, edit `OPD_OPEN_HOUR` and `OPD_CLOSE_HOUR` in `script.js`.
+3. **OPD hours** — **Mon–Sat, Morning 10:00 AM – 1:00 PM & Evening 5:00 – 8:00 PM** with 24x7 Emergency & NICU.  
+   To change the live badge, edit `OPD_SESSIONS` in `script.js`.
 
 4. **Doctor photos** — `images/dr-reshma.jpg` and `images/dr-avinash.jpg` are live.  
    Hero, About, Vaccine, and Gallery images are Unsplash placeholders — replace with real photos and update `index.html` (search for `images.unsplash.com`).

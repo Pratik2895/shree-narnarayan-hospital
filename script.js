@@ -4,8 +4,11 @@
     ───────────────────────────────────────────── */
     const WHATSAPP_NUMBER      = '918530731365';
     const WHATSAPP_CRM_WIDGET_ACTIVE = false;
-    const OPD_OPEN_HOUR        = 9;   // 9 AM IST
-    const OPD_CLOSE_HOUR       = 17;  // 5 PM IST
+    // OPD sessions (IST): Morning 10 AM-1 PM, Evening 5 PM-8 PM, Mon-Sat
+    const OPD_SESSIONS = [
+        { open: 10, close: 13 },  // morning
+        { open: 17, close: 20 }   // evening
+    ];
     const TC_AUTO_INTERVAL_MS  = 4500;
     const APPT_CTA_DELAY_MS    = 8000;
 
@@ -256,13 +259,30 @@
         const hour    = ist.getHours();
         const minute  = ist.getMinutes();
         const decimal = hour + minute / 60;
-        const isOpen  = decimal >= OPD_OPEN_HOUR && decimal < OPD_CLOSE_HOUR;
+        // Sunday (day 0) => OPD closed
+        const day     = ist.getDay();
+        let isOpen    = day !== 0;
+        let nextOpen  = null;
+
+        if (isOpen) {
+            isOpen = OPD_SESSIONS.some(s => decimal >= s.open && decimal < s.close);
+            for (const s of OPD_SESSIONS) {
+                if (decimal < s.open) { nextOpen = s.open; break; }
+            }
+            if (!isOpen && nextOpen === null && decimal >= OPD_SESSIONS[1].close) {
+                nextOpen = 'tomorrow';
+            }
+        }
 
         badge.className = 'opd-live-badge ' + (isOpen ? 'opd-open' : 'opd-closed');
         badge.textContent = isOpen ? 'OPD Open Now' : 'OPD Closed';
         badge.title = isOpen
-            ? `OPD is open until ${OPD_CLOSE_HOUR}:00 IST`
-            : `OPD opens at ${OPD_OPEN_HOUR}:00 AM IST`;
+            ? 'OPD: Morning 10 AM-1 PM & Evening 5-8 PM (Mon-Sat)'
+            : (nextOpen === 'tomorrow'
+                ? 'OPD reopens tomorrow 10:00 AM IST'
+                : (day === 0
+                    ? 'OPD closed today - reopens tomorrow 10:00 AM IST'
+                    : `Next OPD session at ${String(nextOpen).padStart(2, '0')}:00 IST`));
     }
 
     updateOpdStatus();

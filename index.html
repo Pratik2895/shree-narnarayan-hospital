@@ -16,7 +16,7 @@
     <meta property="og:site_name" content="Shree NarNarayan Children Hospital">
     <meta property="og:locale" content="en_IN">
     <meta property="og:title" content="Shree NarNarayan Children Hospital | Pediatric & Neonatal Care in Gandhinagar">
-    <meta property="og:description" content="Specialized newborn, NICU & pediatric care in Kudasan, Gandhinagar. Open 7 days a week with 24x7 emergency support.">
+    <meta property="og:description" content="Specialized newborn, NICU & pediatric care in Kudasan, Gandhinagar. OPD Mon-Sat with 24x7 emergency support.">
     <meta property="og:url" content="https://shreenarnarayanhospital.in/">
     <meta property="og:image" content="https://shreenarnarayanhospital.in/images/og-image.jpg">
     <meta property="og:image:width" content="1200">
@@ -96,9 +96,15 @@
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-          "opens": "09:00",
-          "closes": "17:00"
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "10:00",
+          "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "17:00",
+          "closes": "20:00"
         },
         {
           "@type": "OpeningHoursSpecification",
@@ -148,7 +154,7 @@
         {
           "@type": "Question",
           "name": "What are the hospital timings?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Our OPD is open Monday to Sunday from 9:00 AM to 5:00 PM. Emergency and NICU care are available round the clock." }
+          "acceptedAnswer": { "@type": "Answer", "text": "Our OPD is open Monday to Saturday, Morning 10:00 AM – 1:00 PM and Evening 5:00 PM – 8:00 PM. Emergency and NICU care are available 24/7." }
         },
         {
           "@type": "Question",
@@ -202,7 +208,7 @@
         <div class="container topbar-inner">
             <div class="topbar-left">
                 <span><i class="fas fa-location-dot"></i> Keshvam Square, Kudasan, Gandhinagar</span>
-                <span class="topbar-hours"><i class="fas fa-clock"></i> OPD: Mon – Sun, 9 AM – 5 PM</span>
+                <span class="topbar-hours"><i class="fas fa-clock"></i> OPD: Mon–Sat, Morning 10–1 PM, Evening 5–8 PM</span>
                 <span class="opd-live-badge" id="opdLiveBadge" aria-live="polite"></span>
             </div>
             <div class="topbar-right">
@@ -215,7 +221,7 @@
     <header class="header" id="header">
         <div class="container">
             <a href="#home" class="logo" aria-label="Shree NarNarayan Children Hospital home">
-                <div class="logo-icon" aria-hidden="true"><i class="fas fa-baby"></i></div>
+                <img src="image/hospital%20logo.jpeg" alt="Shree NarNarayan Children Hospital logo" class="logo-img" width="44" height="44">
                 <div class="logo-text">
                     <span class="logo-name">Shree NarNarayan</span>
                     <span class="logo-sub">Children Hospital</span>
@@ -287,8 +293,8 @@
                     <div class="hero-card hero-card-open">
                         <div class="hero-card-icon"><i class="fas fa-heart-circle-check"></i></div>
                         <div>
-                            <strong>OPD Open Today</strong>
-                            <p>9:00 AM - 5:00 PM</p>
+                            <strong>OPD Timings (Mon–Sat)</strong>
+                            <p>Morning 10 AM - 1 PM &amp; Evening 5 - 8 PM</p>
                         </div>
                     </div>
                     <div class="hero-card hero-card-emergency">
@@ -364,8 +370,8 @@
                             <div class="feature">
                                 <div class="feature-icon"><i class="fas fa-calendar-days"></i></div>
                                 <div>
-                                    <h3>Open All 7 Days</h3>
-                                    <p>OPD from 9 AM - 5 PM, emergency support 24x7</p>
+                                    <h3>OPD Mon – Sat</h3>
+                                    <p>Morning 10 AM – 1 PM, Evening 5 – 8 PM, emergency 24x7</p>
                                 </div>
                             </div>
                         </div>
@@ -503,8 +509,8 @@
                                 <h3 class="doctor-name">Dr. Reshma Bhikadiya</h3>
                                 <div class="doctor-specialty"><i class="fas fa-stethoscope"></i> Neonatologist &amp; Pediatrician</div>
                                 <div class="doctor-quals">
-                                    <span class="qual-badge">MD (Pediatrics)</span>
-                                    <span class="qual-badge">DCH</span>
+                                    <span class="qual-badge">MBBS</span>
+                                    <span class="qual-badge">DCH (Pediatrics)</span>
                                 </div>
                                 <p class="doctor-desc">Dedicated to caring for newborns and children with a gentle, reassuring approach — from critical NICU stays to everyday wellness, growth monitoring, and vaccination.</p>
                                 <div class="doctor-meta">
@@ -514,7 +520,7 @@
                                     </div>
                                     <div class="doctor-meta-item">
                                         <i class="fas fa-clock"></i>
-                                        <span>OPD: Mon – Sun, 9 AM – 5 PM</span>
+                                        <span>OPD: Mon–Sat, Morning 10–1 PM, Evening 5–8 PM</span>
                                     </div>
                                 </div>
                                 <a href="https://wa.me/918530731365?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Reshma%20Bhikadiya." target="_blank" rel="noopener" class="btn btn-primary btn-doctor">
@@ -539,8 +545,7 @@
                                 <h3 class="doctor-name">Dr. Avinash Patel</h3>
                                 <div class="doctor-specialty"><i class="fas fa-stethoscope"></i> Neonatologist &amp; Pediatrician</div>
                                 <div class="doctor-quals">
-                                    <span class="qual-badge">MD (Pediatrics)</span>
-                                    <span class="qual-badge">DCH</span>
+                                    <span class="qual-badge">MD Pediatrics (Gold Medalist)</span>
                                 </div>
                                 <p class="doctor-desc">Experienced in neonatal intensive care and pediatric medicine — delivering calm, evidence-based care that reassures families through every stage of a child's health journey.</p>
                                 <div class="doctor-meta">
@@ -550,7 +555,7 @@
                                     </div>
                                     <div class="doctor-meta-item">
                                         <i class="fas fa-clock"></i>
-                                        <span>OPD: Mon – Sun, 9 AM – 5 PM</span>
+                                        <span>OPD: Mon–Sat, Morning 10–1 PM, Evening 5–8 PM</span>
                                     </div>
                                 </div>
                                 <a href="https://wa.me/918530731365?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Avinash%20Patel." target="_blank" rel="noopener" class="btn btn-primary btn-doctor">
@@ -716,7 +721,7 @@
                     <div class="schedule-info">
                         <span class="section-tag light">Working Hours</span>
                         <h2 class="section-title light">We're Here When You Need Us</h2>
-                        <p class="light">Our OPD runs 7 days a week, and our emergency and NICU teams are available around the clock — because a child's health never waits.</p>
+                        <p class="light">Our OPD runs Monday to Saturday, and our emergency and NICU teams are available around the clock &mdash; because a child's health never waits.</p>
                         <div class="emergency-box">
                             <i class="fas fa-phone-volume"></i>
                             <div>
@@ -728,38 +733,38 @@
                     <div class="schedule-table">
                         <div class="schedule-row">
                             <span class="day">Monday</span>
-                            <span class="time">9:00 AM - 5:00 PM</span>
+                            <span class="time">10:00 AM - 1:00 PM &amp; 5:00 - 8:00 PM</span>
                             <span class="status open">Open</span>
                         </div>
                         <div class="schedule-row">
                             <span class="day">Tuesday</span>
-                            <span class="time">9:00 AM - 5:00 PM</span>
+                            <span class="time">10:00 AM - 1:00 PM &amp; 5:00 - 8:00 PM</span>
                             <span class="status open">Open</span>
                         </div>
                         <div class="schedule-row">
                             <span class="day">Wednesday</span>
-                            <span class="time">9:00 AM - 5:00 PM</span>
+                            <span class="time">10:00 AM - 1:00 PM &amp; 5:00 - 8:00 PM</span>
                             <span class="status open">Open</span>
                         </div>
                         <div class="schedule-row">
                             <span class="day">Thursday</span>
-                            <span class="time">9:00 AM - 5:00 PM</span>
+                            <span class="time">10:00 AM - 1:00 PM &amp; 5:00 - 8:00 PM</span>
                             <span class="status open">Open</span>
                         </div>
                         <div class="schedule-row">
                             <span class="day">Friday</span>
-                            <span class="time">9:00 AM - 5:00 PM</span>
+                            <span class="time">10:00 AM - 1:00 PM &amp; 5:00 - 8:00 PM</span>
                             <span class="status open">Open</span>
                         </div>
                         <div class="schedule-row">
                             <span class="day">Saturday</span>
-                            <span class="time">9:00 AM - 5:00 PM</span>
+                            <span class="time">10:00 AM - 1:00 PM &amp; 5:00 - 8:00 PM</span>
                             <span class="status open">Open</span>
                         </div>
                         <div class="schedule-row">
                             <span class="day">Sunday</span>
-                            <span class="time">9:00 AM - 5:00 PM</span>
-                            <span class="status open">Open</span>
+                            <span class="time">Emergency Only</span>
+                            <span class="status closed">Emergency 24x7</span>
                         </div>
                         <div class="schedule-note">
                             <i class="fas fa-clock"></i> Emergency &amp; NICU: Available 24 hours, all days
@@ -789,7 +794,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="faq-answer" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
-                            <p>Our OPD is open Monday to Sunday from 9:00 AM to 5:00 PM. Emergency and NICU care are available round the clock.</p>
+                            <p>Our OPD is open Monday to Saturday, Morning 10:00 AM – 1:00 PM and Evening 5:00 PM – 8:00 PM. Emergency and NICU care are available round the clock.</p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -858,7 +863,7 @@
                         <div class="contact-card">
                             <div class="contact-icon"><i class="fas fa-clock"></i></div>
                             <h3>Working Hours</h3>
-                            <p>OPD: Monday - Sunday<br>9:00 AM - 5:00 PM<br><strong>Emergency: 24 Hours</strong></p>
+                            <p>OPD: Mon - Sat<br>Morning 10 AM - 1 PM, Evening 5 - 8 PM<br><strong>Emergency: 24 Hours</strong></p>
                         </div>
                         <div class="contact-card">
                             <div class="contact-icon"><i class="fas fa-phone"></i></div>
@@ -943,7 +948,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="#home" class="logo" aria-label="Shree NarNarayan Children Hospital">
-                        <div class="logo-icon"><i class="fas fa-baby"></i></div>
+                        <img src="image/hospital%20logo.jpeg" alt="Shree NarNarayan Children Hospital logo" class="logo-img" width="44" height="44">
                         <div class="logo-text">
                             <span class="logo-name">Shree NarNarayan</span>
                             <span class="logo-sub">Children Hospital</span>
@@ -981,7 +986,7 @@
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-clock"></i>
-                        <span>OPD: Mon - Sun, 9 AM - 5 PM<br>Emergency: 24 hours</span>
+                        <span>OPD: Mon - Sat, 10 AM - 1 PM &amp; 5 - 8 PM<br>Emergency: 24 hours</span>
                     </div>
                     <div class="footer-contact-item">
                         <i class="fas fa-phone"></i>
