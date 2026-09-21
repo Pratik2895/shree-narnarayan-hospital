@@ -34,19 +34,20 @@ CREATE POLICY "Allow anonymous appointment booking"
     TO anon
     WITH CHECK (true);
 
--- Policy: Allow authenticated users (admin) to read all
+-- Policy: Allow approved staff accounts to read appointments
 CREATE POLICY "Allow authenticated read all appointments"
     ON public.appointments
     FOR SELECT
     TO authenticated
-    USING (true);
+    USING ((auth.jwt() -> 'app_metadata' ->> 'role') = 'staff');
 
--- Policy: Allow authenticated users (admin) to update
+-- Policy: Allow approved staff accounts to update appointments
 CREATE POLICY "Allow authenticated update appointments"
     ON public.appointments
     FOR UPDATE
     TO authenticated
-    USING (true);
+    USING ((auth.jwt() -> 'app_metadata' ->> 'role') = 'staff')
+    WITH CHECK ((auth.jwt() -> 'app_metadata' ->> 'role') = 'staff');
 
 -- Trigger to update updated_at timestamp
 CREATE OR REPLACE FUNCTION public.update_updated_at_column()
@@ -90,7 +91,7 @@ CREATE POLICY "Allow authenticated read all inquiries"
     ON public.contact_inquiries
     FOR SELECT
     TO authenticated
-    USING (true);
+    USING ((auth.jwt() -> 'app_metadata' ->> 'role') = 'staff');
 
 CREATE TRIGGER update_contact_inquiries_updated_at
     BEFORE UPDATE ON public.contact_inquiries
@@ -132,3 +133,40 @@ CREATE POLICY "Allow public read vaccination schedule"
     FOR SELECT
     TO anon, authenticated
     USING (is_active = TRUE);
+
+-- Privacy-friendly website analytics. Never store names, phone numbers,
+-- message contents, or medical details in this table.
+CREATE TABLE IF NOT EXISTS public.site_events (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    event_name TEXT NOT NULL CHECK (event_name IN (
+        'page_view', 'booking_cta', 'booking_start', 'booking_saved',
+        'booking_failed', 'whatsapp_click', 'call_click', 'web_vitals'
+    )),
+    session_id UUID NOT NULL,
+    page_path TEXT NOT NULL CHECK (char_length(page_path) <= 200),
+    referrer_host TEXT CHECK (char_length(referrer_host) <= 200),
+    device_type TEXT NOT NULL CHECK (device_type IN ('mobile', 'tablet', 'desktop')),
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb CHECK (octet_length(metadata::text) <= 2048),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_site_events_created_at
+    ON public.site_events(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_site_events_name_created_at
+    ON public.site_events(event_name, created_at DESC);
+
+ALTER TABLE public.site_events ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Allow anonymous website event inserts" ON public.site_events;
+CREATE POLICY "Allow anonymous website event inserts"
+    ON public.site_events
+    FOR INSERT
+    TO anon
+    WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Allow authenticated analytics reads" ON public.site_events;
+CREATE POLICY "Allow authenticated analytics reads"
+    ON public.site_events
+    FOR SELECT
+    TO authenticated
+    USING ((auth.jwt() -> 'app_metadata' ->> 'role') = 'staff');

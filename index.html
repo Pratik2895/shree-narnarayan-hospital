@@ -29,20 +29,17 @@
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preload" as="image" href="images/hero-1260.jpg" fetchpriority="high">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=optional" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="preload" as="image" href="images/hero-840.webp" type="image/webp"
+          imagesrcset="images/hero-420.webp 420w, images/hero-840.webp 840w, images/hero-1260.webp 1260w"
+          imagesizes="(max-width: 600px) 92vw, 420px" fetchpriority="high">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=optional" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     </noscript>
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Supabase Client -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Public browser configuration. Access is enforced by Supabase RLS. -->
     <script>
         window.SUPABASE_URL = 'https://mhrjgnnoloxzphuagzft.supabase.co';
         window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ocmpnbm5vbG94enBodWFnemZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5Nzg1NTksImV4cCI6MjEwNDU1NDU1OX0.CgJemJnWAXNSQLRSW2h9AjS3ETGdE8lw01WrakpTjnc';
@@ -221,7 +218,7 @@
     <header class="header" id="header">
         <div class="container">
             <a href="#home" class="logo" aria-label="Shree NarNarayan Children Hospital home">
-                <img src="image/hospital%20logo.jpeg" alt="Shree NarNarayan Children Hospital logo" class="logo-img" width="44" height="44">
+                <img src="images/hospital-logo.webp" alt="Shree NarNarayan Children Hospital logo" class="logo-img" width="44" height="44">
                 <div class="logo-text">
                     <span class="logo-name">Shree NarNarayan</span>
                     <span class="logo-sub">Children Hospital</span>
@@ -257,7 +254,7 @@
                     <h1>Compassionate Healthcare<br>for Your <span class="highlight">Little Ones</span></h1>
                     <p class="hero-desc">A modern children's hospital in Kudasan, Gandhinagar offering specialized newborn care, NICU support, vaccinations, and expert pediatric consultations — with a team that treats every child like family.</p>
                     <div class="hero-buttons">
-                        <a href="https://wa.me/918866663709?text=Hello%20Shree%20NarNarayan%20Children%20Hospital%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+                        <a href="#contact" class="btn btn-primary btn-lg booking-cta">
                             <i class="fab fa-whatsapp"></i> Book Appointment
                         </a>
                         <a href="#services" class="btn btn-outline btn-lg">
@@ -288,7 +285,10 @@
                 </div>
                 <div class="hero-visual">
                     <div class="hero-photo">
-                        <img src="images/hero-1260.jpg" srcset="images/hero-420.jpg 420w, images/hero-840.jpg 840w, images/hero-1260.jpg 1260w" sizes="(max-width: 600px) 92vw, 420px" alt="Pediatric doctor smiling with a young patient" width="900" height="640" fetchpriority="high">
+                        <picture>
+                            <source type="image/webp" srcset="images/hero-420.webp 420w, images/hero-840.webp 840w, images/hero-1260.webp 1260w" sizes="(max-width: 600px) 92vw, 420px">
+                            <img src="images/hero-840.jpg" srcset="images/hero-420.jpg 420w, images/hero-840.jpg 840w, images/hero-1260.jpg 1260w" sizes="(max-width: 600px) 92vw, 420px" alt="Pediatric doctor smiling with a young patient" width="900" height="640" fetchpriority="high">
+                        </picture>
                     </div>
                     <div class="hero-card hero-card-open">
                         <div class="hero-card-icon"><i class="fas fa-heart-circle-check"></i></div>
@@ -334,7 +334,10 @@
                 <div class="about-grid">
                     <div class="about-image">
                         <div class="about-img-wrapper">
-                            <img src="images/about.jpg" alt="Doctor examining a child during a consultation" loading="lazy" decoding="async" width="900" height="675">
+                            <picture>
+                                <source type="image/webp" srcset="images/about.webp">
+                                <img src="images/about.jpg" alt="Doctor examining a child during a consultation" loading="lazy" decoding="async" width="900" height="675">
+                            </picture>
                         </div>
                         <div class="experience-badge">
                             <span class="exp-number">24×7</span>
@@ -522,7 +525,7 @@
                                         <span>OPD: Mon–Sat, Morning 10–1 PM, Evening 5–8 PM</span>
                                     </div>
                                 </div>
-                                <a href="https://wa.me/918866663709?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Avinash%20Patel." target="_blank" rel="noopener" class="btn btn-primary btn-doctor">
+                                <a href="#contact" class="btn btn-primary btn-doctor booking-cta" data-message="Preferred doctor: Dr. Avinash Patel">
                                     <i class="fab fa-whatsapp"></i> Book Appointment
                                 </a>
                             </div>
@@ -558,7 +561,7 @@
                                         <span>OPD: Mon–Sat, Morning 10–1 PM, Evening 5–8 PM</span>
                                     </div>
                                 </div>
-                                <a href="https://wa.me/918866663709?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Reshma%20Bhikadiya." target="_blank" rel="noopener" class="btn btn-primary btn-doctor">
+                                <a href="#contact" class="btn btn-primary btn-doctor booking-cta" data-message="Preferred doctor: Dr. Reshma Bhikadiya">
                                     <i class="fab fa-whatsapp"></i> Book Appointment
                                 </a>
                             </div>
@@ -595,7 +598,7 @@
                             <li><i class="fas fa-check-circle"></i> 16-24 months: DPT boosters, MMR, OPV</li>
                             <li><i class="fas fa-check-circle"></i> Catch-up &amp; travel vaccines on request</li>
                         </ul>
-                        <a href="https://wa.me/918866663709?text=Hello%2C%20I%20would%20like%20to%20check%20my%20child%27s%20vaccination%20schedule." target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Book a Vaccination Slot</a>
+                        <a href="#contact" class="btn btn-primary booking-cta" data-service="Vaccination / Immunisation"><i class="fas fa-calendar-check"></i> Book a Vaccination Slot</a>
                     </div>
                     <div class="vaccine-visual">
                         <img src="images/vaccine.jpg" alt="Parent holding a young child during a healthcare visit" loading="lazy" decoding="async" width="800" height="600">
@@ -639,7 +642,7 @@
                     <div class="tc-track" id="tcTrack">
 
                         <div class="testimonial-card tc-slide">
-                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             <p>"I had a very good experience with Dr. Avinash Patel at Narnarayan Hospital. He is very polite, knowledgeable, and listens to the patient's concerns with patience. His explanation of the diagnosis and treatment was clear and reassuring."</p>
                             <div class="testimonial-author">
                                 <div class="avatar"><i class="fas fa-user"></i></div>
@@ -651,7 +654,7 @@
                         </div>
 
                         <div class="testimonial-card tc-slide">
-                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             <p>"We had a wonderful experience at Shri Nar Narayan Children Hospital. I visited with my 6.5-month-old son for his cough problem, and we were very fortunate to consult Dr. Avinash Patel. Highly recommend!"</p>
                             <div class="testimonial-author">
                                 <div class="avatar"><i class="fas fa-user"></i></div>
@@ -663,7 +666,7 @@
                         </div>
 
                         <div class="testimonial-card tc-slide">
-                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             <p>"My 5-month-old daughter was admitted last week. We are very thankful to Dr. Avinash Patel for his excellent treatment and guidance. The nursing and hospital staff were also very supportive, caring, and cooperative."</p>
                             <div class="testimonial-author">
                                 <div class="avatar"><i class="fas fa-user"></i></div>
@@ -675,7 +678,7 @@
                         </div>
 
                         <div class="testimonial-card tc-slide">
-                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             <p>"Had a great experience at Shree Narnarayan Hospital. The staff was polite, the environment clean, and the doctors were professional and attentive. Everything was well-organized and timely. Highly recommend for quality and trustworthy healthcare."</p>
                             <div class="testimonial-author">
                                 <div class="avatar"><i class="fas fa-user"></i></div>
@@ -687,7 +690,7 @@
                         </div>
 
                         <div class="testimonial-card tc-slide">
-                            <div class="stars" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <div class="stars" role="img" aria-label="5 out of 5 stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                             <p>"Facilities, treatment, doctors and all the staff members are very cooperative. The hospital is clean and well-maintained. Absolutely the right place to bring your child for quality pediatric care in Gandhinagar."</p>
                             <div class="testimonial-author">
                                 <div class="avatar"><i class="fas fa-user"></i></div>
@@ -878,21 +881,21 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name">Parent's Name</label>
-                                    <input type="text" id="name" name="name" placeholder="Your full name" required autocomplete="name" aria-describedby="nameError">
+                                    <input type="text" id="name" name="name" placeholder="Your full name" required maxlength="100" autocomplete="name">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone Number</label>
-                                    <input type="tel" id="phone" name="phone" placeholder="Your 10-digit mobile number" required autocomplete="tel" inputmode="tel" pattern="[+]?[0-9][0-9 ()-]*" aria-describedby="phoneError">
+                                    <input type="tel" id="phone" name="phone" placeholder="Your 10-digit mobile number" required maxlength="20" autocomplete="tel" inputmode="tel" pattern="[+]?[0-9][0-9 ()-]*">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="childName">Child's Name</label>
-                                    <input type="text" id="childName" name="childName" placeholder="Your child's name" autocomplete="off">
+                                    <input type="text" id="childName" name="childName" placeholder="Your child's name" maxlength="100" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <label for="childAge">Child's Age</label>
-                                    <input type="text" id="childAge" name="childAge" placeholder="e.g., 2 years / 3 months">
+                                    <input type="text" id="childAge" name="childAge" placeholder="e.g., 2 years / 3 months" maxlength="50">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -910,7 +913,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="4" placeholder="Describe your concern or preferred date/time..."></textarea>
+                                <textarea id="message" name="message" rows="4" maxlength="1000" placeholder="Describe your concern or preferred date/time..."></textarea>
+                            </div>
+                            <div class="form-consent">
+                                <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                                <label for="privacyConsent">I agree that the hospital may use these details to respond to this appointment request. Please avoid adding sensitive medical information here.</label>
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-full">
                                 <i class="fab fa-whatsapp"></i> Send via WhatsApp
@@ -948,7 +955,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="#home" class="logo" aria-label="Shree NarNarayan Children Hospital">
-                        <img src="image/hospital%20logo.jpeg" alt="Shree NarNarayan Children Hospital logo" class="logo-img" width="44" height="44">
+                        <img src="images/hospital-logo.webp" alt="Shree NarNarayan Children Hospital logo" class="logo-img" width="44" height="44" loading="lazy" decoding="async">
                         <div class="logo-text">
                             <span class="logo-name">Shree NarNarayan</span>
                             <span class="logo-sub">Children Hospital</span>
@@ -1000,7 +1007,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; <span id="year">2026</span> Shree NarNarayan Children Hospital, Gandhinagar. All rights reserved.</p>
-                <p class="footer-disclaimer">This website provides general information and does not constitute medical advice. In an emergency, call <a href="tel:+918866663709">+91 88666 63709</a>.</p>
+                <p class="footer-disclaimer">This website provides general information and does not constitute medical advice. In an emergency, call <a href="tel:+918866663709">+91 88666 63709</a>. Anonymous usage metrics help us improve this website; analytics never include form names, phone numbers, or messages.</p>
             </div>
         </div>
     </footer>
@@ -1009,7 +1016,7 @@
     <div class="float-appt-cta" id="floatApptCta" role="complementary" aria-label="Quick appointment">
         <button class="float-appt-close" id="floatApptClose" aria-label="Dismiss"><i class="fas fa-times"></i></button>
         <p><strong>Need an appointment?</strong></p>
-        <a href="https://wa.me/918866663709?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm"><i class="fab fa-whatsapp"></i> Book on WhatsApp</a>
+        <a href="#contact" class="btn btn-whatsapp btn-sm booking-cta"><i class="fas fa-calendar-check"></i> Request appointment</a>
     </div>
 
     <a href="https://wa.me/918866663709?text=Hello%20Shree%20NarNarayan%20Children%20Hospital" target="_blank" rel="noopener" class="float-btn float-whatsapp" aria-label="Chat on WhatsApp">
@@ -1023,6 +1030,6 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="script.js?v=supabase-insert-fix-1"></script>
+    <script src="script.js?v=production-2"></script>
 </body>
 </html>

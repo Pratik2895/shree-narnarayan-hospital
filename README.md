@@ -32,6 +32,7 @@ Built with **vanilla HTML, CSS, and JavaScript** — zero build tools, zero depe
 | **FAQ Live Search** | Filters accordion items as you type; shows "no results" message |
 | **Animated Counters** | Stats count up when scrolled into view |
 | **Scroll Fade-in** | Cards and sections animate in via IntersectionObserver |
+| **Privacy-friendly Analytics** | First-party Supabase funnel, traffic, device, and page-load events without appointment personal data |
 
 ### Sections
 Hero → Emergency Strip → About → Services (8) → Facilities (6) → **Doctors** → Vaccination Schedule → **Testimonials** → Working Hours → FAQ → Contact + Map → Footer
@@ -50,6 +51,7 @@ shree-narnarayan-hospital/
 ├── robots.txt          # SEO crawler rules
 ├── sitemap.xml         # Site sitemap (update domain before going live)
 ├── widget-aisensy.html # AiSensy WhatsApp CRM activation guide
+├── ANALYTICS.md        # Event definitions and aggregate reporting queries
 ├── images/             # Doctor photos (used in production)
 │   ├── dr-reshma.jpg
 │   └── dr-avinash.jpg

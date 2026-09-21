@@ -17,26 +17,100 @@
     const hasIntersectionObserver = 'IntersectionObserver' in window;
 
     /* ─────────────────────────────────────────────
-       SUPABASE INITIALIZATION
+       SUPABASE REST CLIENT (small, dependency-free)
     ───────────────────────────────────────────── */
-    let supabase = null;
-    // Library from jsdelivr exports as `supabase` (lowercase) globally
-    const SupabaseLib = window.supabase || window.Supabase;
-    if (window.SUPABASE_URL && window.SUPABASE_ANON_KEY &&
-        window.SUPABASE_URL !== 'https://your-project.supabase.co' &&
-        SupabaseLib && typeof SupabaseLib.createClient === 'function') {
-        supabase = SupabaseLib.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-        window.supabaseClient = supabase; // expose for debugging
-        console.log('Supabase client initialized');
-    } else {
-        console.warn('Supabase init failed:', {
-            hasUrl: !!window.SUPABASE_URL,
-            hasKey: !!window.SUPABASE_ANON_KEY,
-            hasLib: !!SupabaseLib,
-            libType: typeof SupabaseLib,
-            hasCreateClient: SupabaseLib && typeof SupabaseLib.createClient === 'function'
-        });
+    const supabaseConfigured = Boolean(
+        window.SUPABASE_URL && window.SUPABASE_ANON_KEY &&
+        window.SUPABASE_URL !== 'https://your-project.supabase.co'
+    );
+
+    async function insertAppointment(payload) {
+        if (!supabaseConfigured) throw new Error('Appointment service is not configured.');
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000);
+
+        try {
+            const response = await fetch(`${window.SUPABASE_URL}/rest/v1/appointments`, {
+                method: 'POST',
+                headers: {
+                    apikey: window.SUPABASE_ANON_KEY,
+                    Authorization: `Bearer ${window.SUPABASE_ANON_KEY}`,
+                    'Content-Type': 'application/json',
+                    Prefer: 'return=minimal'
+                },
+                body: JSON.stringify(payload),
+                signal: controller.signal
+            });
+
+            if (!response.ok) {
+                const details = await response.json().catch(() => ({}));
+                throw new Error(details.message || `Appointment request failed (${response.status}).`);
+            }
+        } finally {
+            clearTimeout(timeout);
+        }
     }
+
+    function getSessionId() {
+        try {
+            const existing = sessionStorage.getItem('hospital_analytics_session');
+            if (existing) return existing;
+            const created = window.crypto?.randomUUID?.();
+            if (created) sessionStorage.setItem('hospital_analytics_session', created);
+            return created;
+        } catch (_) {
+            return window.crypto?.randomUUID?.();
+        }
+    }
+
+    const analyticsSessionId = getSessionId();
+
+    function trackEvent(eventName, metadata = {}) {
+        if (!supabaseConfigured || !analyticsSessionId) return;
+
+        let referrerHost = null;
+        try {
+            referrerHost = document.referrer ? new URL(document.referrer).hostname : null;
+        } catch (_) {
+            referrerHost = null;
+        }
+
+        const width = window.innerWidth;
+        const deviceType = width < 768 ? 'mobile' : width < 1100 ? 'tablet' : 'desktop';
+        const payload = {
+            event_name: eventName,
+            session_id: analyticsSessionId,
+            page_path: window.location.pathname.slice(0, 200),
+            referrer_host: referrerHost?.slice(0, 200) || null,
+            device_type: deviceType,
+            metadata
+        };
+
+        fetch(`${window.SUPABASE_URL}/rest/v1/site_events`, {
+            method: 'POST',
+            headers: {
+                apikey: window.SUPABASE_ANON_KEY,
+                Authorization: `Bearer ${window.SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json',
+                Prefer: 'return=minimal'
+            },
+            body: JSON.stringify(payload),
+            keepalive: true
+        }).catch(() => {});
+    }
+
+    trackEvent('page_view');
+
+    window.addEventListener('load', () => {
+        const navigation = performance.getEntriesByType?.('navigation')?.[0];
+        if (!navigation) return;
+        trackEvent('web_vitals', {
+            dom_interactive_ms: Math.round(navigation.domInteractive),
+            load_ms: Math.round(navigation.loadEventEnd),
+            transfer_kb: Math.round((navigation.transferSize || 0) / 1024)
+        });
+    }, { once: true });
 
     /* ─────────────────────────────────────────────
        WhatsApp CRM widget toggle
@@ -55,6 +129,37 @@
     const navLinks    = document.querySelectorAll('.nav-link');
     const backToTop   = document.getElementById('backToTop');
     const contactForm = document.getElementById('contactForm');
+
+    document.querySelectorAll('.booking-cta').forEach(link => {
+        link.addEventListener('click', () => {
+            trackEvent('booking_cta', { placement: link.closest('section')?.id || 'floating' });
+            const serviceInput = document.getElementById('service');
+            const messageInput = document.getElementById('message');
+            if (serviceInput && link.dataset.service) serviceInput.value = link.dataset.service;
+            if (messageInput && link.dataset.message) messageInput.value = link.dataset.message;
+            window.setTimeout(() => document.getElementById('name')?.focus({ preventScroll: true }), 500);
+        });
+    });
+
+    function getPlacement(element) {
+        const section = element.closest('section[id]');
+        if (section) return section.id;
+        if (element.closest('header')) return 'header';
+        if (element.closest('footer')) return 'footer';
+        return 'global';
+    }
+
+    document.querySelectorAll('a[href^="https://wa.me/"]').forEach(link => {
+        link.addEventListener('click', () => trackEvent('whatsapp_click', {
+            placement: getPlacement(link)
+        }));
+    });
+
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', () => trackEvent('call_click', {
+            placement: getPlacement(link)
+        }));
+    });
 
     /* ─────────────────────────────────────────────
        HEADER SCROLL + BACK-TO-TOP (rAF-throttled)
@@ -439,21 +544,30 @@
     if (contactForm) {
         const nameInput  = document.getElementById('name');
         const phoneInput = document.getElementById('phone');
+        const consentInput = document.getElementById('privacyConsent');
         const formError  = document.getElementById('formError');
         const submitBtn  = contactForm.querySelector('button[type="submit"]');
+        const defaultSubmitLabel = submitBtn.innerHTML;
+        let isSubmitting = false;
+
+        contactForm.addEventListener('focusin', () => trackEvent('booking_start'), { once: true });
 
         function clearErrors() {
-            [nameInput, phoneInput].forEach(input => {
+            [nameInput, phoneInput, consentInput].forEach(input => {
                 input.classList.remove('invalid');
                 input.removeAttribute('aria-invalid');
             });
-            if (formError) formError.textContent = '';
+            if (formError) {
+                formError.textContent = '';
+                formError.classList.remove('success');
+            }
         }
 
         nameInput.addEventListener('input', clearErrors);
         phoneInput.addEventListener('input', () => {
             if (phoneInput.classList.contains('invalid')) clearErrors();
         });
+        consentInput.addEventListener('change', clearErrors);
 
         function showErrors(message, firstInvalid) {
             if (formError) formError.textContent = message;
@@ -463,6 +577,7 @@
 
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (isSubmitting) return;
             clearErrors();
 
             const fd        = new FormData(contactForm);
@@ -489,43 +604,39 @@
                 return;
             }
 
-            // Insert without SELECT: anonymous visitors cannot read patient records.
-            let appointmentId = null;
-            let appointmentSaved = false;
-            if (supabase) {
-                try {
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-                    submitBtn.disabled = true;
-
-                    const reference = window.crypto?.randomUUID?.();
-                    const { error } = await supabase
-                        .from('appointments')
-                        .insert({
-                            ...(reference ? { id: reference } : {}),
-                            parent_name: name,
-                            phone: phone,
-                            child_name: childName || null,
-                            child_age: childAge || null,
-                            service: service || null,
-                            message: message || null,
-                            source: 'website'
-                        });
-
-                    if (error) {
-                        console.error('Supabase insert error:', error);
-                        // Don't block - continue to WhatsApp
-                    } else {
-                        appointmentSaved = true;
-                        appointmentId = reference || null;
-                    }
-                } catch (err) {
-                    console.error('Supabase error:', err);
-                    // Don't block - continue to WhatsApp
-                }
+            if (!consentInput.checked) {
+                consentInput.classList.add('invalid');
+                showErrors('Please agree to the appointment follow-up notice.', consentInput);
+                return;
             }
 
-            if (!appointmentSaved && formError) {
-                formError.textContent = 'Your request could not be saved online. Please send the WhatsApp message to request your appointment.';
+            isSubmitting = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving request...';
+            submitBtn.disabled = true;
+
+            let appointmentId = null;
+            let appointmentSaved = false;
+            const reference = window.crypto?.randomUUID?.();
+
+            if (supabaseConfigured) {
+                try {
+                    await insertAppointment({
+                        ...(reference ? { id: reference } : {}),
+                        parent_name: name,
+                        phone,
+                        child_name: childName || null,
+                        child_age: childAge || null,
+                        service: service || null,
+                        message: message || null,
+                        source: 'website'
+                    });
+                    appointmentSaved = true;
+                    appointmentId = reference || null;
+                    trackEvent('booking_saved', { service: service || 'not_selected' });
+                } catch (err) {
+                    console.error('Appointment save failed:', err);
+                    trackEvent('booking_failed', { reason: err.name === 'AbortError' ? 'timeout' : 'request_error' });
+                }
             }
 
             const lines = [
@@ -542,9 +653,14 @@
             const text = encodeURIComponent(lines.join('\n'));
             const url  = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
 
-            submitBtn.innerHTML  = '<i class="fas fa-check"></i> Opening WhatsApp...';
-            submitBtn.style.background  = '#10b981';
-            submitBtn.style.borderColor = '#10b981';
+            if (appointmentSaved) {
+                formError.classList.add('success');
+                formError.textContent = `Request saved${appointmentId ? ` — reference ${appointmentId.slice(0, 8)}` : ''}. Continue in WhatsApp to notify the hospital.`;
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Continue in WhatsApp';
+            } else {
+                formError.textContent = 'We could not save your request online. Continue in WhatsApp or call the hospital.';
+                submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Continue in WhatsApp';
+            }
 
             const win = window.open(url, '_blank');
             if (!win) {
@@ -552,10 +668,9 @@
             }
 
             setTimeout(() => {
-                submitBtn.innerHTML  = '<i class="fab fa-whatsapp"></i> Send via WhatsApp';
-                submitBtn.style.background  = '';
-                submitBtn.style.borderColor = '';
-                submitBtn.disabled   = false;
+                submitBtn.innerHTML = defaultSubmitLabel;
+                submitBtn.disabled = false;
+                isSubmitting = false;
             }, 4000);
         });
     }
