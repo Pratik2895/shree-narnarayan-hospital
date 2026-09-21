@@ -489,16 +489,19 @@
                 return;
             }
 
-            // Save to Supabase first (if configured)
+            // Insert without SELECT: anonymous visitors cannot read patient records.
             let appointmentId = null;
+            let appointmentSaved = false;
             if (supabase) {
                 try {
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
                     submitBtn.disabled = true;
 
-                    const { data, error } = await supabase
+                    const reference = window.crypto?.randomUUID?.();
+                    const { error } = await supabase
                         .from('appointments')
                         .insert({
+                            ...(reference ? { id: reference } : {}),
                             parent_name: name,
                             phone: phone,
                             child_name: childName || null,
@@ -506,21 +509,23 @@
                             service: service || null,
                             message: message || null,
                             source: 'website'
-                        })
-                        .select('id')
-                        .single();
+                        });
 
                     if (error) {
                         console.error('Supabase insert error:', error);
                         // Don't block - continue to WhatsApp
-                    } else if (data) {
-                        appointmentId = data.id;
-                        console.log('Appointment saved with ID:', appointmentId);
+                    } else {
+                        appointmentSaved = true;
+                        appointmentId = reference || null;
                     }
                 } catch (err) {
                     console.error('Supabase error:', err);
                     // Don't block - continue to WhatsApp
                 }
+            }
+
+            if (!appointmentSaved && formError) {
+                formError.textContent = 'Your request could not be saved online. Please send the WhatsApp message to request your appointment.';
             }
 
             const lines = [

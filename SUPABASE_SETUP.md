@@ -56,13 +56,13 @@ netlify deploy --prod --dir .
 ```
 
 ## 🔧 Environment Variables (Production)
-For production, **don't hardcode keys in HTML**. Use Netlify Environment Variables:
+The project URL and anon/publishable key are public browser configuration. They may be included in HTML when RLS and database grants enforce access. Never put a secret or service-role key in the browser. If you prefer build-time configuration, use Netlify Environment Variables:
 
 1. Netlify Dashboard → **Site settings** → **Environment variables**
 2. Add:
    - `SUPABASE_URL` = your project URL
    - `SUPABASE_ANON_KEY` = your anon key
-3. Update `index.html` to use build-time injection or Netlify Functions
+3. Add a build step to inject these public values into `index.html`. This static site currently has no build step, so setting hosting environment variables alone does not change its configuration.
 
 ## ✅ Test the Integration
 1. Visit your deployed site
@@ -78,7 +78,8 @@ For production, **don't hardcode keys in HTML**. Use Netlify Environment Variabl
 ## 🔒 Security Notes
 - `anon` key is safe for client-side (browser) — it only has INSERT permission on appointments
 - RLS policies prevent reading other patients' data
-- For admin dashboard, create a separate service role key (keep secret!)
+- The current authenticated policies allow every signed-in user to read/update appointments; they do not check an admin role. Restrict these policies to approved staff before adding public sign-up or a patient portal.
+- Keep service-role/secret keys on a trusted server only; never use them in a browser admin dashboard.
 
 ## 🎯 Next Steps (Optional)
 - Add email notifications via Supabase Edge Functions
@@ -92,7 +93,12 @@ For production, **don't hardcode keys in HTML**. Use Netlify Environment Variabl
 | Form submits but no DB entry | Check browser console for errors; verify Supabase URL/key |
 | CORS error | Supabase allows all origins by default; check URL matches exactly |
 | RLS policy error | Ensure schema ran completely; check `appointments` table has RLS enabled |
+| Insert fails when chained with `.select('id').single()` | Anonymous users have INSERT but no SELECT policy. Use insert-only; the form now generates an optional UUID reference before inserting and includes it in WhatsApp only after a successful save. Do not add public SELECT access to patient records. |
 | WhatsApp doesn't open | Popup blocked? Check browser settings; fallback uses `window.location` |
+
+### Verified configuration (September 20, 2026)
+
+The project dashboard was healthy, all three schema tables existed, and `appointments` was empty. Live appointment policies matched this repository: anonymous INSERT and authenticated SELECT/UPDATE, with RLS enabled. The local form's insert/read mismatch has been corrected. Deploy the updated `script.js`, then submit a clearly labelled synthetic test and verify its row in Table Editor. Local mocked checks cover save success, API rejection, network failure, and missing Supabase client. A subsequent live integration test reproduced the original 401 / 42501 RLS error and successfully saved through the corrected form handler using the actual Supabase SDK. Anonymous SELECT returned no rows, confirming the record remains private. WhatsApp was intercepted during testing; no message was sent. The synthetic record is labelled `CODEX INTEGRATION TEST - IGNORE` (ID `da12e3f4-b03d-4aae-aff5-737fa4ad955c`). The updated website files have not been deployed.
 
 ## 📞 Support
 - Supabase Docs: [supabase.com/docs](https://supabase.com/docs)
