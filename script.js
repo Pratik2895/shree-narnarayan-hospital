@@ -1,4 +1,68 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
+    // Keep photo links usable without JavaScript or native dialog support.
+    const tour = document.getElementById('tour-dialog');
+    const tourLinks = [...document.querySelectorAll('.tour-photo')];
+    if (tour && typeof tour.showModal === 'function' && tourLinks.length) {
+        const largeImage = document.getElementById('tour-large-image');
+        const largeSource = document.getElementById('tour-large-source');
+        const caption = document.getElementById('tour-dialog-caption');
+        const count = document.getElementById('tour-count');
+        const error = document.getElementById('tour-error');
+        const close = tour.querySelector('.tour-close');
+        let current = 0;
+        let opener = null;
+        function showPhoto(index) {
+            current = (index + tourLinks.length) % tourLinks.length;
+            const link = tourLinks[current];
+            largeImage.hidden = false;
+            error.hidden = true;
+            largeImage.alt = link.querySelector('img').alt;
+            caption.textContent = link.closest('figure').querySelector('figcaption').innerText;
+            count.textContent = `${current + 1} / ${tourLinks.length}`;
+            document.getElementById('tour-fallback').href = link.href;
+            largeSource.srcset = link.dataset.webp;
+            largeImage.src = link.href;
+        }
+        largeImage.addEventListener('error', () => {
+            largeImage.hidden = true;
+            error.hidden = false;
+        });
+        largeImage.addEventListener('load', () => {
+            largeImage.hidden = false;
+            error.hidden = true;
+        });
+        tourLinks.forEach((link, index) => link.addEventListener('click', event => {
+            if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+            event.preventDefault();
+            opener = link;
+            showPhoto(index);
+            tour.showModal();
+            document.body.classList.add('tour-open');
+            close.focus();
+        }));
+        close.addEventListener('click', () => tour.close());
+        tour.querySelector('.tour-prev').addEventListener('click', () => showPhoto(current - 1));
+        tour.querySelector('.tour-next').addEventListener('click', () => showPhoto(current + 1));
+        tour.addEventListener('close', () => {
+            document.body.classList.remove('tour-open');
+            if (opener) opener.focus({ preventScroll: true });
+        });
+        tour.addEventListener('keydown', event => {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+                event.preventDefault();
+                showPhoto(current + (event.key === 'ArrowRight' ? 1 : -1));
+            }
+            if (event.key === 'Tab') {
+                const controls = [...tour.querySelectorAll('button, a[href]')].filter(el => el.getClientRects().length);
+                const first = controls[0], last = controls[controls.length - 1];
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault(); last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault(); first.focus();
+                }
+            }
+        });
+    }
     /* ─────────────────────────────────────────────
        CONFIGURATION
     ───────────────────────────────────────────── */
@@ -687,7 +751,7 @@
     document.querySelectorAll('img[src^="images/"], img[src^="https://images.unsplash"]').forEach(img => {
         img.addEventListener('error', () => {
             const wrapper = img.closest(
-                '.hero-photo, .about-img-wrapper, .vaccine-visual, .gallery-item, .doctor-photo-circle'
+                '.hero-photo, .about-img-wrapper, .vaccine-visual, .tour-photo, .doctor-photo-circle'
             );
             if (wrapper) {
                 img.style.display = 'none';

@@ -52,7 +52,7 @@ shree-narnarayan-hospital/
 ├── sitemap.xml         # Site sitemap (update domain before going live)
 ├── widget-aisensy.html # AiSensy WhatsApp CRM activation guide
 ├── ANALYTICS.md        # Event definitions and aggregate reporting queries
-├── images/             # Doctor photos (used in production)
+├── images/             # Web assets; optimized client photos in hospital/
 │   ├── dr-reshma.jpg
 │   └── dr-avinash.jpg
 └── image/              # High-resolution originals (PNG, not served)
@@ -73,8 +73,7 @@ shree-narnarayan-hospital/
 3. **OPD hours** — **Mon–Sat, Morning 10:00 AM – 1:00 PM & Evening 5:00 – 8:00 PM** with 24x7 Emergency & NICU.  
    To change the live badge, edit `OPD_SESSIONS` in `script.js`.
 
-4. **Doctor photos** — `images/dr-reshma.jpg` and `images/dr-avinash.jpg` are live.  
-   Hero, About, Vaccine, and Gallery images are Unsplash placeholders — replace with real photos and update `index.html` (search for `images.unsplash.com`).
+4. **Hospital photography** — Real client photographs now appear in the hero, About, hospital tour, doctor cards, vaccination section, and social preview. See the regeneration instructions below.
 
 5. **Google rating** — Currently hardcoded as **5.0 / 73 reviews**. Update the `aggregateRating` JSON-LD block and `google-rating-summary` HTML whenever the count changes significantly.
 
@@ -132,3 +131,37 @@ Drag-and-drop the folder into Netlify Drop, or connect the GitHub repo — works
 | **Address** | Keshvam Square, 301-304, SMVS Hospital Road, Kudasan, Gandhinagar 382426 |
 | **Phone** | +91 88666 63709 |
 | **WhatsApp** | +91 88666 63709 |
+
+
+## Hospital photography
+
+The site serves optimized assets from `images/hospital/`. `Hospital/` contains the untouched client originals and is not referenced by the page. Keep the originals available locally for regeneration; they are not needed in the deployed site.
+
+- Front reception is the hero and social preview; the waiting/play area is used in About.
+- The ten-photo tour beneath Facilities includes reception, waiting/play area, consultation room, OPD/emergency entrances, NICU entrance, patient rooms, corridor, and pharmacy.
+- Doctor cards use individual square crops. The vaccination image is accurately captioned “Consultation room.”
+- IMG_4448 is retained as an unused alternative because it repeats the waiting-area view and has foreground motion blur.
+- Visible photographer credits remain intact. Exported EXIF retains ASCII attribution but removes camera/GPS metadata.
+
+### Regenerate images
+
+Requires Python 3 and Pillow (offline tooling only; no website runtime dependency):
+
+```powershell
+python -m pip install Pillow
+python scripts/prepare_hospital_photos.py
+python scripts/check_hospital_photos.py
+node --check script.js
+```
+
+The generator normalizes orientation and sRGB colour, prepares WebP/JPEG variants, and writes `images/hospital/manifest.json` with source mappings, crop coordinates, captions, placements, dimensions, bytes and encoder quality. Originals are never overwritten. Adjust the `PHOTOS` list or `CROPS` mapping to change assets; update the corresponding HTML when changing names, captions, or placements. JPEG quality for enlarged views is lowered only as needed to meet the 400,000-byte budget.
+
+The hero preload and picture use matching responsive candidates. Below-fold images load lazily, while enlarged files are requested only after opening the tour. The dialog supports touch buttons, arrow keys, Escape, focus containment/restoration, and load-error recovery. Without JavaScript, links open the enlarged JPEG directly.
+
+### Local preview
+
+```powershell
+python -m http.server 8765 --bind 127.0.0.1
+```
+
+Visit http://127.0.0.1:8765/#hospital-tour. See `PHOTO_INTEGRATION_REPORT.md` for validation and optimization results.
