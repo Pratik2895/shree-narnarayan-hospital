@@ -1451,6 +1451,33 @@ h1, h2, h3, h4 {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.footer-social a.footer-social-link {
+    width: auto;
+    min-height: 40px;
+    padding: 0 12px;
+    gap: 8px;
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+.footer-social-link span {
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.contact-icon[href] {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.contact-icon[href]:hover,
+.contact-icon[href]:focus-visible {
+    color: var(--white);
+    background: var(--primary);
+    outline: 3px solid rgba(3, 105, 161, 0.2);
+    outline-offset: 2px;
+}
+
 .footer-social a:hover {
     background: var(--whatsapp);
     transform: translateY(-3px);
