@@ -1,0 +1,911 @@
+{
+  "colour_space": "sRGB",
+  "quality": 82,
+  "photos": [
+    {
+      "slug": "reception-front",
+      "source": "Hospital/FACEBOOK COVERPHOTO.JPEG",
+      "caption": "Front reception",
+      "placements": [
+        "hero",
+        "tour",
+        "social"
+      ],
+      "source_dimensions": [
+        4608,
+        3456
+      ],
+      "crop": null,
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/reception-front-420.webp",
+          "width": 420,
+          "height": 315,
+          "bytes": 23158,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-420.jpg",
+          "width": 420,
+          "height": 315,
+          "bytes": 30244,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 28132,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-480.jpg",
+          "width": 480,
+          "height": 360,
+          "bytes": 37772,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-840.webp",
+          "width": 840,
+          "height": 630,
+          "bytes": 70940,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-840.jpg",
+          "width": 840,
+          "height": 630,
+          "bytes": 100199,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-960.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 86986,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-960.jpg",
+          "width": 960,
+          "height": 720,
+          "bytes": 125477,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-1260.webp",
+          "width": 1260,
+          "height": 945,
+          "bytes": 131706,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-1260.jpg",
+          "width": 1260,
+          "height": 945,
+          "bytes": 203033,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-1440.webp",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 161044,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-1440.jpg",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 254952,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-large.webp",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 245114,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-front-large.jpg",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 378373,
+          "quality": 79
+        },
+        {
+          "path": "images/hospital/reception-front-social.jpg",
+          "width": 1200,
+          "height": 630,
+          "bytes": 133234,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "slug": "reception-area",
+      "source": "Hospital/2023_09_10_02_19_IMG_1414.JPEG",
+      "caption": "Reception area",
+      "placements": [
+        "tour"
+      ],
+      "source_dimensions": [
+        4608,
+        3456
+      ],
+      "crop": null,
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/reception-area-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 19884,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-area-480.jpg",
+          "width": 480,
+          "height": 360,
+          "bytes": 31444,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-area-960.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 56404,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-area-960.jpg",
+          "width": 960,
+          "height": 720,
+          "bytes": 96802,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-area-1440.webp",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 105596,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-area-1440.jpg",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 191975,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-area-large.webp",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 165152,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/reception-area-large.jpg",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 316729,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "slug": "waiting-play-area",
+      "source": "Hospital/2023_08_23_11_25_IMG_4427.JPG.jpeg",
+      "caption": "Waiting area and children’s play zone",
+      "placements": [
+        "about",
+        "tour"
+      ],
+      "source_dimensions": [
+        4500,
+        3000
+      ],
+      "crop": null,
+      "attribution": "PRASHANT PARMAR ARCHITECT | Copyright STUDIO_16MM",
+      "outputs": [
+        {
+          "path": "images/hospital/waiting-play-area-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 30996,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/waiting-play-area-480.jpg",
+          "width": 480,
+          "height": 320,
+          "bytes": 36841,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/waiting-play-area-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 103834,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/waiting-play-area-960.jpg",
+          "width": 960,
+          "height": 640,
+          "bytes": 133544,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/waiting-play-area-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 217362,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/waiting-play-area-1440.jpg",
+          "width": 1440,
+          "height": 960,
+          "bytes": 286724,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/waiting-play-area-large.webp",
+          "width": 1920,
+          "height": 1280,
+          "bytes": 376730,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/waiting-play-area-large.jpg",
+          "width": 1920,
+          "height": 1280,
+          "bytes": 393305,
+          "quality": 73
+        }
+      ]
+    },
+    {
+      "slug": "consultation-room",
+      "source": "Hospital/2023_09_10_02_23_IMG_1423.JPEG",
+      "caption": "Consultation room",
+      "placements": [
+        "vaccination",
+        "tour"
+      ],
+      "source_dimensions": [
+        4608,
+        3456
+      ],
+      "crop": null,
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/consultation-room-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 35056,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/consultation-room-480.jpg",
+          "width": 480,
+          "height": 360,
+          "bytes": 42502,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/consultation-room-960.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 96400,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/consultation-room-960.jpg",
+          "width": 960,
+          "height": 720,
+          "bytes": 135938,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/consultation-room-1440.webp",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 177154,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/consultation-room-1440.jpg",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 273729,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/consultation-room-large.webp",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 282884,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/consultation-room-large.jpg",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 377719,
+          "quality": 76
+        }
+      ]
+    },
+    {
+      "slug": "opd-emergency-entrances",
+      "source": "Hospital/2023_09_10_02_19_IMG_1416.JPEG",
+      "caption": "OPD and emergency-room entrances",
+      "placements": [
+        "tour"
+      ],
+      "source_dimensions": [
+        4608,
+        3456
+      ],
+      "crop": null,
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/opd-emergency-entrances-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 29250,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/opd-emergency-entrances-480.jpg",
+          "width": 480,
+          "height": 360,
+          "bytes": 37022,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/opd-emergency-entrances-960.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 90450,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/opd-emergency-entrances-960.jpg",
+          "width": 960,
+          "height": 720,
+          "bytes": 124920,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/opd-emergency-entrances-1440.webp",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 178404,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/opd-emergency-entrances-1440.jpg",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 262729,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/opd-emergency-entrances-large.webp",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 288778,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/opd-emergency-entrances-large.jpg",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 372834,
+          "quality": 76
+        }
+      ]
+    },
+    {
+      "slug": "nicu-entrance",
+      "source": "Hospital/2023_09_10_02_27_IMG_1438.JPEG",
+      "caption": "NICU entrance and adjacent area",
+      "placements": [
+        "tour"
+      ],
+      "source_dimensions": [
+        4608,
+        3456
+      ],
+      "crop": null,
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/nicu-entrance-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 16360,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/nicu-entrance-480.jpg",
+          "width": 480,
+          "height": 360,
+          "bytes": 27461,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/nicu-entrance-960.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 38126,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/nicu-entrance-960.jpg",
+          "width": 960,
+          "height": 720,
+          "bytes": 76814,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/nicu-entrance-1440.webp",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 64688,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/nicu-entrance-1440.jpg",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 146867,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/nicu-entrance-large.webp",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 105310,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/nicu-entrance-large.jpg",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 246375,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "slug": "two-bed-room",
+      "source": "Hospital/2023_09_10_02_31_IMG_1465.JPEG",
+      "caption": "Two-bed patient room",
+      "placements": [
+        "tour"
+      ],
+      "source_dimensions": [
+        4608,
+        3456
+      ],
+      "crop": null,
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/two-bed-room-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 10100,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/two-bed-room-480.jpg",
+          "width": 480,
+          "height": 360,
+          "bytes": 20695,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/two-bed-room-960.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 25084,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/two-bed-room-960.jpg",
+          "width": 960,
+          "height": 720,
+          "bytes": 60498,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/two-bed-room-1440.webp",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 44818,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/two-bed-room-1440.jpg",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 122706,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/two-bed-room-large.webp",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 79510,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/two-bed-room-large.jpg",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 217967,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "slug": "patient-room",
+      "source": "Hospital/2023_09_10_02_38_IMG_1476.JPEG",
+      "caption": "Patient room with attendant seating",
+      "placements": [
+        "tour"
+      ],
+      "source_dimensions": [
+        4608,
+        3456
+      ],
+      "crop": null,
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/patient-room-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 13500,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/patient-room-480.jpg",
+          "width": 480,
+          "height": 360,
+          "bytes": 23370,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/patient-room-960.webp",
+          "width": 960,
+          "height": 720,
+          "bytes": 35382,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/patient-room-960.jpg",
+          "width": 960,
+          "height": 720,
+          "bytes": 70565,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/patient-room-1440.webp",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 67130,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/patient-room-1440.jpg",
+          "width": 1440,
+          "height": 1080,
+          "bytes": 146110,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/patient-room-large.webp",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 124242,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/patient-room-large.jpg",
+          "width": 1920,
+          "height": 1440,
+          "bytes": 262435,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "slug": "hospital-corridor",
+      "source": "Hospital/2023_09_10_02_35_IMG_1471.JPEG",
+      "caption": "Hospital corridor",
+      "placements": [
+        "tour"
+      ],
+      "source_dimensions": [
+        3456,
+        4608
+      ],
+      "crop": null,
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/hospital-corridor-480.webp",
+          "width": 480,
+          "height": 640,
+          "bytes": 33236,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/hospital-corridor-480.jpg",
+          "width": 480,
+          "height": 640,
+          "bytes": 52946,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/hospital-corridor-960.webp",
+          "width": 960,
+          "height": 1280,
+          "bytes": 118928,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/hospital-corridor-960.jpg",
+          "width": 960,
+          "height": 1280,
+          "bytes": 193766,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/hospital-corridor-1440.webp",
+          "width": 1440,
+          "height": 1920,
+          "bytes": 309404,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/hospital-corridor-1440.jpg",
+          "width": 1440,
+          "height": 1920,
+          "bytes": 439351,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/hospital-corridor-large.webp",
+          "width": 1440,
+          "height": 1920,
+          "bytes": 309404,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/hospital-corridor-large.jpg",
+          "width": 1440,
+          "height": 1920,
+          "bytes": 395054,
+          "quality": 79
+        }
+      ]
+    },
+    {
+      "slug": "pharmacy",
+      "source": "Hospital/2023_08_23_12_48_IMG_4430.JPG.jpeg",
+      "caption": "In-house pharmacy",
+      "placements": [
+        "tour"
+      ],
+      "source_dimensions": [
+        4500,
+        3000
+      ],
+      "crop": null,
+      "attribution": "PRASHANT PARMAR ARCHITECT | Copyright STUDIO_16MM",
+      "outputs": [
+        {
+          "path": "images/hospital/pharmacy-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 25744,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/pharmacy-480.jpg",
+          "width": 480,
+          "height": 320,
+          "bytes": 34036,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/pharmacy-960.webp",
+          "width": 960,
+          "height": 640,
+          "bytes": 81796,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/pharmacy-960.jpg",
+          "width": 960,
+          "height": 640,
+          "bytes": 114974,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/pharmacy-1440.webp",
+          "width": 1440,
+          "height": 960,
+          "bytes": 177284,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/pharmacy-1440.jpg",
+          "width": 1440,
+          "height": 960,
+          "bytes": 246182,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/pharmacy-large.webp",
+          "width": 1920,
+          "height": 1280,
+          "bytes": 332730,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/pharmacy-large.jpg",
+          "width": 1920,
+          "height": 1280,
+          "bytes": 394112,
+          "quality": 79
+        }
+      ]
+    },
+    {
+      "slug": "dr-avinash",
+      "source": "Hospital/Dr Avinash.jpeg",
+      "caption": "Dr. Avinash Patel",
+      "placements": [
+        "doctors"
+      ],
+      "source_dimensions": [
+        3456,
+        4608
+      ],
+      "crop": [
+        1050,
+        1750,
+        2400,
+        3100
+      ],
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/dr-avinash-240.webp",
+          "width": 240,
+          "height": 240,
+          "bytes": 12516,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-avinash-240.jpg",
+          "width": 240,
+          "height": 240,
+          "bytes": 15631,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-avinash-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 38970,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-avinash-480.jpg",
+          "width": 480,
+          "height": 480,
+          "bytes": 52139,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-avinash-720.webp",
+          "width": 720,
+          "height": 720,
+          "bytes": 77574,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-avinash-720.jpg",
+          "width": 720,
+          "height": 720,
+          "bytes": 106311,
+          "quality": 82
+        }
+      ]
+    },
+    {
+      "slug": "dr-reshma",
+      "source": "Hospital/Dr Reshma.jpeg",
+      "caption": "Dr. Reshma Bhikadiya",
+      "placements": [
+        "doctors"
+      ],
+      "source_dimensions": [
+        6000,
+        4000
+      ],
+      "crop": [
+        2550,
+        750,
+        4850,
+        3050
+      ],
+      "attribution": null,
+      "outputs": [
+        {
+          "path": "images/hospital/dr-reshma-240.webp",
+          "width": 240,
+          "height": 240,
+          "bytes": 12022,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-reshma-240.jpg",
+          "width": 240,
+          "height": 240,
+          "bytes": 14677,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-reshma-480.webp",
+          "width": 480,
+          "height": 480,
+          "bytes": 41542,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-reshma-480.jpg",
+          "width": 480,
+          "height": 480,
+          "bytes": 49292,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-reshma-720.webp",
+          "width": 720,
+          "height": 720,
+          "bytes": 97768,
+          "quality": 82
+        },
+        {
+          "path": "images/hospital/dr-reshma-720.jpg",
+          "width": 720,
+          "height": 720,
+          "bytes": 111002,
+          "quality": 82
+        }
+      ]
+    }
+  ],
+  "unused": [
+    {
+      "source": "Hospital/2023_08_23_12_30_IMG_4448.JPG.jpeg",
+      "reason": "Similar waiting-area view with foreground motion blur"
+    }
+  ]
+}

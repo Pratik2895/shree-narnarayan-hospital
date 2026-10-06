@@ -1,5 +1,5 @@
 param(
-    [string]$SiteUrl = 'https://shreenarnarayanhospital.pages.dev'
+    [string]$SiteUrl = 'https://shreenarnarayanchildrenhospital.in'
 )
 
 $ErrorActionPreference = 'Stop'
